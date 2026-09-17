@@ -1,0 +1,5 @@
+# Full local install. Playwright is kept out of requirements.txt because the
+# Vercel deployment installs that file and cannot run Chromium.
+-r requirements.txt
+
+playwright>=1.48.0

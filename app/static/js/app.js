@@ -15,6 +15,7 @@
   const runTitle = document.getElementById("run-title");
   const runSub = document.getElementById("run-sub");
   const runBrand = document.getElementById("run-brand");
+  const statusBanner = document.getElementById("status-banner");
 
   let pollTimer = null;
   let currentJobId = null;
@@ -23,13 +24,40 @@
   let starting = false;
   let skuList = [];
 
+  async function getJson(url, fallback) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return fallback;
+      return await res.json();
+    } catch (err) {
+      return fallback;
+    }
+  }
+
+  function showBanner(message, tone) {
+    statusBanner.textContent = message;
+    statusBanner.classList.remove("hidden");
+    statusBanner.dataset.tone = tone;
+  }
+
   async function init() {
-    const [health, skus, channels] = await Promise.all([
-      fetch("/api/health").then((r) => r.json()),
-      fetch("/api/skus").then((r) => r.json()),
-      fetch("/api/channels").then((r) => r.json()),
+    const [health, skusRaw, channelsRaw] = await Promise.all([
+      getJson("/api/health", { ok: false, boot_error: "The API is unreachable." }),
+      getJson("/api/skus", []),
+      getJson("/api/channels", []),
     ]);
+    const skus = Array.isArray(skusRaw) ? skusRaw : [];
+    const channels = Array.isArray(channelsRaw) ? channelsRaw : [];
     skuList = skus;
+
+    if (!health.ok) {
+      showBanner(
+        `The application did not start correctly: ${health.boot_error || "unknown error"}`,
+        "error"
+      );
+    } else if (health.degraded_reason) {
+      showBanner(health.degraded_reason, "warn");
+    }
 
     if (health.mock_mode) {
       modePill.textContent = "Mock mode";
@@ -46,8 +74,8 @@
     skuGrid.innerHTML = skus
       .map(
         (s) => `
-      <button class="sku-card" data-brand="${escapeHtml(s.brand_ruleset)}" data-sku="${escapeHtml(s.sku)}" type="button">
-        <div class="sku-media"><img src="${escapeHtml(s.hero_thumbnail_url)}" alt="" /></div>
+      <button class="sku-card" data-brand="${escapeHtml(s.brand_ruleset)}" data-sku="${escapeHtml(s.sku)}" type="button"${s.can_generate ? "" : " disabled"}>
+        <div class="sku-media"><img src="${escapeHtml(s.hero_thumbnail_url)}" alt="" onerror="this.remove()" /></div>
         <div class="sku-body">
           <span class="sku-brand">${s.brand_ruleset === "coastwide" ? "Coastwide Professional" : "Staples"}</span>
           <h3>${escapeHtml(s.card_label)}</h3>
@@ -55,18 +83,27 @@
             <span>${s.shot_count} images</span>
             <span>${s.reference_count} Staples refs</span>
           </div>
+          ${s.can_generate ? "" : `<p class="sku-unavailable">${escapeHtml(s.unavailable_reason || "Unavailable")}</p>`}
         </div>
       </button>`
       )
       .join("");
 
-    skuGrid.querySelectorAll(".sku-card").forEach((btn) => {
+    if (!skus.length) {
+      skuGrid.innerHTML = `<p class="empty-state">No products could be loaded.</p>`;
+    }
+
+    skuGrid.querySelectorAll(".sku-card:not([disabled])").forEach((btn) => {
       btn.addEventListener("click", () => previewSku(btn.dataset.sku));
     });
   }
 
   async function previewSku(sku) {
-    const detail = await fetch(`/api/skus/${sku}`).then((r) => r.json());
+    const detail = await getJson(`/api/skus/${sku}`, null);
+    if (!detail) {
+      showBanner("Could not load this product's brief.", "error");
+      return;
+    }
     const meta = skuList.find((x) => x.sku === sku);
     const refs = (detail.reference_shots || []).filter((r) => r.has_reference);
     const bullets = (detail.marketplace_bullets || [])
@@ -76,9 +113,9 @@
 
     skuBrief.classList.remove("hidden");
     skuBrief.innerHTML = `
-      <img src="${escapeHtml(detail.hero_thumbnail_url)}" alt="Hero from Staples Assets" />
+      <img src="${escapeHtml(detail.hero_thumbnail_url)}" alt="Hero from Staples Assets" onerror="this.remove()" />
       <div>
-        <p class="eyebrow">From Staples Assets · ${escapeHtml(detail.hero_path.split("/").slice(-2).join("/"))}</p>
+        <p class="eyebrow">From Staples Assets · ${escapeHtml((detail.hero_path || "").split("/").slice(-2).join("/"))}</p>
         <h3>${escapeHtml(detail.card_label)}</h3>
         ${detail.headliner ? `<p class="headliner">${escapeHtml(detail.headliner)}</p>` : ""}
         ${
@@ -122,7 +159,12 @@
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        alert(err.error || "Could not start job");
+        const detail = err.detail ?? err.error;
+        const message =
+          typeof detail === "string"
+            ? detail
+            : detail?.error || "Could not start job";
+        showBanner(message, "error");
         return;
       }
       const data = await res.json();

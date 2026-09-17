@@ -106,6 +106,8 @@ class SkuCard(BaseModel):
     brand_accent: str
     reference_count: int = 0
     headliner: str | None = None
+    can_generate: bool = True
+    unavailable_reason: str | None = None
 
 
 class ReferenceShot(BaseModel):

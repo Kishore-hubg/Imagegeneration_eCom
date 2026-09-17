@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+
+# 2.3 GB of PSD/PNG source imagery — far over the serverless bundle limit.
+Staples Assets/
+assets/
+outputs/
+outputs_live/
+scripts/
+
+*.pdf
+*.psd
+*.zip
+_DEV_HANDOFF/__MACOSX/
+_DEV_HANDOFF/*.md
+*.md
+start-app.ps1
+requirements-local.txt

@@ -2,13 +2,21 @@
 
 from __future__ import annotations
 
+import os
 import re
+import tempfile
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 HEX_RE = re.compile(r"^#[0-9A-F]{6}$")
+
+
+def running_serverless() -> bool:
+    """True on Vercel/Lambda, where only the temp dir is writable."""
+    return bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
 
 DEMO_ORDER = {
     "24639471": 1,  # ExpressMop
@@ -35,6 +43,10 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     max_concurrent_shots: int = 3
     mock_mode: bool = True
+
+    # The 2.3 GB `Staples Assets/` tree cannot ship to a serverless bundle, so
+    # a missing source image degrades the SKU instead of killing startup there.
+    strict_assets: bool = Field(default_factory=lambda: not running_serverless())
 
     higgsfield_api_key: str = ""
     higgsfield_api_secret: str = ""
@@ -70,6 +82,28 @@ class Settings(BaseSettings):
     @property
     def project_root(self) -> Path:
         return Path(__file__).resolve().parent.parent
+
+    @property
+    def is_serverless(self) -> bool:
+        return running_serverless()
+
+    @property
+    def writable_root(self) -> Path:
+        """Base for anything the app creates. Read-only deploys get the temp dir."""
+        if self.is_serverless:
+            return Path(tempfile.gettempdir()) / "staples-poc"
+        return self.project_root
+
+    @property
+    def output_root(self) -> Path:
+        path = self.output_dir
+        if not path.is_absolute():
+            path = (self.writable_root / path).resolve()
+        return path
+
+    @property
+    def thumbnail_dir(self) -> Path:
+        return self.writable_root / "assets" / "thumbnails"
 
     @property
     def higgsfield_models(self) -> list[str]:

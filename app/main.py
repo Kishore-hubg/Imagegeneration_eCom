@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 from app.config import DEMO_ORDER, get_settings
 from app.loader import AppConfig, brand_accent, demo_ordered_skus, load_app_config
 from app.models import CreateJobRequest, ReferenceShot, SkuCard, SkuDetail
-from app.orchestrator import Orchestrator
+from app.orchestrator import AssetsUnavailableError, Orchestrator
 from app.pipeline.hero import ensure_thumbnail
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -31,6 +31,8 @@ app_config: AppConfig | None = None
 orchestrator: Orchestrator | None = None
 thumb_dir: Path | None = None
 higgsfield_status: dict | None = None
+boot_error: str | None = None
+browser_ready: bool = False
 
 
 async def _preflight_higgsfield(settings) -> None:
@@ -76,9 +78,9 @@ async def _preflight_higgsfield(settings) -> None:
         logger.error("HIGGSFIELD_REQUIRED=true — photo shots will fail rather than fall back.")
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    global app_config, orchestrator, thumb_dir
+async def _boot() -> None:
+    """Build app state. Individual failures degrade features, never the process."""
+    global app_config, orchestrator, thumb_dir, browser_ready
     settings = get_settings()
     logging.getLogger().setLevel(settings.log_level.upper())
 
@@ -89,49 +91,90 @@ async def lifespan(app: FastAPI):
 
     app_config = load_app_config(settings)
     for sku, loaded in app_config.skus.items():
-        logger.info(
-            "Boot SKU %s: %s enabled shots",
-            sku,
-            len(loaded.enabled_shots),
-        )
+        logger.info("Boot SKU %s: %s enabled shots", sku, len(loaded.enabled_shots))
 
-    thumb_dir = settings.project_root / "assets" / "thumbnails"
-    thumb_dir.mkdir(parents=True, exist_ok=True)
-    for loaded in app_config.skus.values():
-        dest = thumb_dir / f"{loaded.sku}.png"
-        try:
-            ensure_thumbnail(loaded.hero_abs, dest, png_fallback=loaded.png_fallback_abs)
-        except Exception:
-            logger.exception("Failed to build thumbnail for %s", loaded.sku)
-
-    from app.pipeline import compose
-
+    thumb_dir = settings.thumbnail_dir
     try:
-        await compose.start_browser()
-    except Exception:
-        logger.exception(
-            "Playwright Chromium failed to start — overlay rasterization will fail until fixed"
-        )
+        thumb_dir.mkdir(parents=True, exist_ok=True)
+        for loaded in app_config.skus.values():
+            if loaded.hero_abs is None:
+                continue
+            dest = thumb_dir / f"{loaded.sku}.png"
+            try:
+                ensure_thumbnail(loaded.hero_abs, dest, png_fallback=loaded.png_fallback_abs)
+            except Exception:
+                logger.exception("Failed to build thumbnail for %s", loaded.sku)
+    except OSError:
+        logger.exception("Thumbnail directory %s is not writable", thumb_dir)
+
+    # Chromium has no binary and no room inside a serverless bundle.
+    if settings.is_serverless:
+        logger.warning("Serverless runtime — skipping Playwright, overlay shots are unavailable")
+    else:
+        from app.pipeline import compose
+
+        try:
+            await compose.start_browser()
+            browser_ready = True
+        except Exception:
+            logger.exception(
+                "Playwright Chromium failed to start — overlay rasterization will fail until fixed"
+            )
 
     orchestrator = Orchestrator(app_config)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global boot_error
+    try:
+        await _boot()
+    except Exception as exc:
+        boot_error = f"{type(exc).__name__}: {exc}"
+        logger.exception("Startup failed — serving in degraded mode")
+
     yield
 
-    await compose.stop_browser()
+    if browser_ready:
+        from app.pipeline import compose
+
+        try:
+            await compose.stop_browser()
+        except Exception:
+            logger.exception("Error stopping Playwright")
 
 
 app = FastAPI(title="Staples Image Generation POC", lifespan=lifespan)
 
 STATIC_DIR = Path(__file__).parent / "static"
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+BUNDLED_THUMB_DIR = STATIC_DIR / "thumbnails"
+if STATIC_DIR.is_dir():
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+else:
+    logger.error("Static directory %s is missing from this deployment", STATIC_DIR)
+
+
+def _require_config() -> AppConfig:
+    if app_config is None:
+        raise HTTPException(503, boot_error or "Application configuration is not loaded")
+    return app_config
+
+
+def _require_orchestrator() -> Orchestrator:
+    if orchestrator is None:
+        raise HTTPException(503, boot_error or "Job orchestrator is not available")
+    return orchestrator
 
 
 @app.get("/")
 def index():
-    return FileResponse(STATIC_DIR / "index.html")
+    path = STATIC_DIR / "index.html"
+    if not path.exists():
+        raise HTTPException(503, "UI assets are missing from this deployment")
+    return FileResponse(path)
 
 
 def _sku_card(loaded) -> SkuCard:
-    assert app_config
     approved = loaded.raw.get("approved_source_strings") or {}
     ref_count = sum(
         1 for s in loaded.enabled_shots if s.get("_acceptance_reference_abs")
@@ -148,19 +191,25 @@ def _sku_card(loaded) -> SkuCard:
         brand_accent=brand_accent(loaded.brand_ruleset),
         reference_count=ref_count,
         headliner=approved.get("headliner"),
+        can_generate=loaded.can_generate,
+        unavailable_reason=(
+            None
+            if loaded.can_generate
+            else "Source imagery is not available on this deployment"
+        ),
     )
 
 
 @app.get("/api/skus")
 def list_skus() -> list[SkuCard]:
-    assert app_config and thumb_dir
-    return [_sku_card(loaded) for loaded in demo_ordered_skus(app_config)]
+    config = _require_config()
+    return [_sku_card(loaded) for loaded in demo_ordered_skus(config)]
 
 
 @app.get("/api/skus/{sku}")
 def get_sku(sku: str) -> SkuDetail:
     """Product detail with Staples Assets hero + production references."""
-    assert app_config
+    app_config = _require_config()
     loaded = app_config.skus.get(sku)
     if not loaded:
         raise HTTPException(404, "Unknown SKU")
@@ -209,16 +258,21 @@ def get_sku(sku: str) -> SkuDetail:
 
 @app.get("/api/thumbs/{filename}")
 def get_thumb(filename: str):
-    assert thumb_dir
-    path = thumb_dir / filename
-    if not path.exists():
-        raise HTTPException(404, "Thumbnail not found")
-    return FileResponse(path, media_type="image/png")
+    if thumb_dir is not None:
+        generated = thumb_dir / filename
+        if generated.exists():
+            return FileResponse(generated, media_type="image/png")
+
+    # Deployments without `Staples Assets/` still get a catalogue image.
+    bundled = BUNDLED_THUMB_DIR / filename
+    if bundled.exists():
+        return FileResponse(bundled, media_type="image/png")
+    raise HTTPException(404, "Thumbnail not found")
 
 
 @app.get("/api/channels")
 def list_channels():
-    assert app_config
+    app_config = _require_config()
     channels = [
         c
         for c in app_config.platform_targets.get("channels", [])
@@ -229,16 +283,24 @@ def list_channels():
 
 @app.post("/api/jobs", status_code=201)
 async def create_job(body: CreateJobRequest):
-    assert orchestrator and app_config
+    app_config = _require_config()
+    orchestrator = _require_orchestrator()
     if body.sku not in app_config.skus:
         raise HTTPException(404, {"error": "Unknown SKU"})
-    job = await orchestrator.create_job(body.sku)
+    try:
+        job = await orchestrator.create_job(body.sku)
+    except AssetsUnavailableError as exc:
+        raise HTTPException(
+            503,
+            "Source imagery for this SKU is not deployed, so generation cannot run here. "
+            f"Missing: {exc.missing[0] if exc.missing else 'hero image'}",
+        ) from exc
     return {"job_id": job.job_id}
 
 
 @app.get("/api/jobs/{job_id}")
 def get_job(job_id: str):
-    assert orchestrator
+    orchestrator = _require_orchestrator()
     job = orchestrator.get_job(job_id)
     if not job:
         raise HTTPException(404, "Job not found")
@@ -262,7 +324,7 @@ def get_job(job_id: str):
 
 @app.get("/api/assets/{sku}/{job_id}/{shot_id}/{filename}")
 def get_asset(sku: str, job_id: str, shot_id: str, filename: str):
-    assert orchestrator
+    orchestrator = _require_orchestrator()
     job = orchestrator.get_job(job_id)
     if not job or job.sku != sku:
         raise HTTPException(404, "Job not found")
@@ -274,7 +336,7 @@ def get_asset(sku: str, job_id: str, shot_id: str, filename: str):
 
 @app.get("/api/reference/{sku}/{shot_id}")
 def get_reference(sku: str, shot_id: str):
-    assert app_config
+    app_config = _require_config()
     loaded = app_config.skus.get(sku)
     if not loaded:
         raise HTTPException(404, "Unknown SKU")
@@ -292,7 +354,7 @@ def download_package(
     job_id: str,
     include_intermediates: bool = Query(False),
 ):
-    assert orchestrator
+    orchestrator = _require_orchestrator()
     job = orchestrator.get_job(job_id)
     if not job:
         raise HTTPException(404, "Job not found")
@@ -316,10 +378,30 @@ def download_package(
 
 @app.get("/api/health")
 def health():
-    assert app_config
+    settings = get_settings()
+    if app_config is None:
+        return {
+            "ok": False,
+            "boot_error": boot_error or "Configuration did not load",
+            "mock_mode": settings.mock_mode,
+            "serverless": settings.is_serverless,
+            "skus": {},
+        }
+
+    missing = app_config.missing_assets
     return {
         "ok": True,
         "mock_mode": app_config.settings.mock_mode,
+        "serverless": app_config.settings.is_serverless,
+        "generation_available": not missing and (browser_ready or app_config.settings.mock_mode),
+        "overlay_rasterization": browser_ready,
+        "degraded_reason": (
+            "Product source imagery is not deployed with this build, so image "
+            "generation is disabled. The catalogue and brand rules are read-only here."
+            if missing
+            else None
+        ),
+        "missing_asset_skus": sorted(missing),
         "scene_provider": (
             "mock"
             if app_config.settings.mock_mode

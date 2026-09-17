@@ -20,13 +20,19 @@ class LoadedSku:
     raw: dict[str, Any]
     path: Path
     enabled_shots: list[dict[str, Any]]
-    hero_abs: Path
+    hero_abs: Path | None
     png_fallback_abs: Path | None = None
+    missing_assets: list[str] = field(default_factory=list)
     brand_ruleset: str = "staples"
     display_name: str = ""
     short_name: str = ""
     card_label: str = ""
     resolved_refs: dict[str, Path | None] = field(default_factory=dict)
+
+    @property
+    def can_generate(self) -> bool:
+        """A run needs the hero image; everything else can be missing."""
+        return self.hero_abs is not None
 
 
 @dataclass
@@ -35,6 +41,14 @@ class AppConfig:
     rulesets: dict[str, dict[str, Any]]
     platform_targets: dict[str, Any]
     settings: Settings
+
+    @property
+    def missing_assets(self) -> dict[str, list[str]]:
+        return {
+            sku: loaded.missing_assets
+            for sku, loaded in self.skus.items()
+            if loaded.missing_assets
+        }
 
 
 def _strip_path_note(value: str | None) -> str | None:
@@ -90,14 +104,18 @@ def _resolve_shot_paths(
     sku_raw: dict[str, Any],
     shot: dict[str, Any],
     product_refs: dict[str, Path | None],
+    missing: list[str],
 ) -> None:
     ref = shot.get("acceptance_reference")
     if ref:
         abs_path = settings.resolve_asset(ref)
         if abs_path and not abs_path.exists():
-            raise FileNotFoundError(
-                f"acceptance_reference missing for {sku_raw['sku']}/{shot['shot_id']}: {abs_path}"
-            )
+            if settings.strict_assets:
+                raise FileNotFoundError(
+                    f"acceptance_reference missing for {sku_raw['sku']}/{shot['shot_id']}: {abs_path}"
+                )
+            missing.append(str(ref))
+            abs_path = None
         shot["_acceptance_reference_abs"] = abs_path
     else:
         shot["_acceptance_reference_abs"] = None
@@ -164,10 +182,14 @@ def load_app_config(settings: Settings | None = None) -> AppConfig:
         if brand not in rulesets:
             raise ValueError(f"Unknown brand_ruleset '{brand}' for SKU {sku}")
 
+        missing: list[str] = []
         hero_rel = raw["hero_image"]["path"]
         hero_abs = settings.resolve_asset(hero_rel)
         if hero_abs is None or not hero_abs.exists():
-            raise FileNotFoundError(f"Hero missing for {sku}: {hero_rel}")
+            if settings.strict_assets:
+                raise FileNotFoundError(f"Hero missing for {sku}: {hero_rel}")
+            missing.append(str(hero_rel))
+            hero_abs = None
 
         fallback_rel = _strip_path_note(raw["hero_image"].get("png_fallback"))
         fallback_abs = settings.resolve_asset(fallback_rel) if fallback_rel else None
@@ -193,7 +215,7 @@ def load_app_config(settings: Settings | None = None) -> AppConfig:
                     raise ValueError(f"{sku}/{shot['shot_id']} unknown target {tid}")
             if shot.get("brand_ruleset") and shot["brand_ruleset"] not in rulesets:
                 raise ValueError(f"{sku}/{shot['shot_id']} bad brand_ruleset")
-            _resolve_shot_paths(settings, raw, shot, product_refs)
+            _resolve_shot_paths(settings, raw, shot, product_refs, missing)
 
         loaded = LoadedSku(
             sku=sku,
@@ -209,6 +231,7 @@ def load_app_config(settings: Settings | None = None) -> AppConfig:
                 "card_label_for_landing_page", raw.get("short_name", sku)
             ),
             resolved_refs=product_refs,
+            missing_assets=missing,
         )
         skus[sku] = loaded
         logger.info(
@@ -217,6 +240,13 @@ def load_app_config(settings: Settings | None = None) -> AppConfig:
             len(enabled),
             len(raw["shots"]),
         )
+        if missing:
+            logger.warning(
+                "SKU %s is degraded — %s source asset(s) not on disk, generation disabled: %s",
+                sku,
+                len(missing),
+                missing[0],
+            )
 
     expected = {"24639471", "24321408", "24636223", "990119"}
     missing = expected - set(skus)

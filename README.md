@@ -15,10 +15,15 @@ Proof-of-concept pipeline that turns supplier product photos into Staples-compli
 cd d:\Praty_Tasks\StaplesImageGeneration
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r requirements-local.txt
+python -m playwright install chromium
 copy .env.example .env   # already MOCK_MODE=true
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
+
+`requirements.txt` holds the runtime dependencies and is what the Vercel build
+installs. `requirements-local.txt` adds Playwright on top, because the hosted
+function cannot run Chromium.
 
 Open http://127.0.0.1:8000
 
@@ -85,6 +90,32 @@ end to end. Findings for the current account are recorded in
 
 Set `HIGGSFIELD_REQUIRED=true` to make photo shots **fail** instead of silently
 substituting Gemini — use this for any run whose output is presented as Higgsfield work.
+
+## Vercel deployment (catalogue only)
+
+`vercel.json` routes every path to `api/index.py`, which re-exports the FastAPI
+app. The deployed site serves the UI, the SKU catalogue, brand rules and channel
+targets — **image generation is disabled there**, and each card says so. Card
+thumbnails come from `app/static/thumbnails/`, a 590 KB pre-rendered copy that
+ships with the build; locally the same route prefers the freshly generated ones.
+
+Three hard limits make the pipeline itself impossible on a serverless function:
+
+| Limit | Consequence |
+|---|---|
+| `Staples Assets/` is 2.3 GB of PSD/PNG | Cannot fit the 250 MB bundle, so heroes and references are absent |
+| No Chromium binary, and no room for one | Overlay rasterization is unavailable |
+| Ephemeral, per-invocation instances | In-memory job state would not survive polling |
+
+The app is built to survive all three. Startup never raises: a missing asset
+degrades its SKU (`can_generate: false`), a failed boot is reported through
+`GET /api/health` as `ok: false` with `boot_error`, and everything the app
+writes goes under `/tmp` instead of the read-only deployment directory.
+`STRICT_ASSETS` controls this and defaults to `false` only on Vercel/Lambda, so
+a missing asset is still a hard failure locally.
+
+To run the full pipeline against a public URL, deploy the container image to a
+host with a persistent disk and a real browser rather than a serverless function.
 
 ## Assumptions
 

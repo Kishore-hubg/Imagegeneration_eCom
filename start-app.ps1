@@ -85,12 +85,12 @@ $venvPython = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
 $venvUvicorn = Join-Path $ProjectRoot ".venv\Scripts\uvicorn.exe"
 
 if (-not (Test-Path $venvPython)) {
-    throw "Virtual environment not found at .venv. Create it with: python -m venv .venv ; .\.venv\Scripts\pip.exe install -r requirements.txt"
+    throw "Virtual environment not found at .venv. Create it with: python -m venv .venv ; .\.venv\Scripts\pip.exe install -r requirements-local.txt"
 }
 
 if (-not (Test-Path $venvUvicorn)) {
     Write-Warn "uvicorn not found in .venv - installing requirements..."
-    & $venvPython -m pip install -r (Join-Path $ProjectRoot "requirements.txt")
+    & $venvPython -m pip install -r (Join-Path $ProjectRoot "requirements-local.txt")
 }
 
 # --- Resolve host / port -----------------------------------------------------

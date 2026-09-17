@@ -23,6 +23,15 @@ from app.pipeline import router as shot_router
 logger = logging.getLogger(__name__)
 
 
+class AssetsUnavailableError(RuntimeError):
+    """Raised when a SKU's source imagery is not present on this deployment."""
+
+    def __init__(self, sku: str, missing: list[str]) -> None:
+        self.sku = sku
+        self.missing = missing
+        super().__init__(f"Source assets unavailable for SKU {sku}")
+
+
 class Orchestrator:
     def __init__(self, app_config: AppConfig) -> None:
         self.app_config = app_config
@@ -38,6 +47,8 @@ class Orchestrator:
         sku = self.app_config.skus.get(sku_id)
         if not sku:
             raise KeyError(sku_id)
+        if not sku.can_generate:
+            raise AssetsUnavailableError(sku_id, sku.missing_assets)
 
         job_id = str(uuid.uuid4())
         shots: list[ShotRecord] = []
@@ -88,9 +99,7 @@ class Orchestrator:
         job.status = JobStatus.running
         self._refresh_counts(job)
 
-        output_root = self.settings.output_dir
-        if not output_root.is_absolute():
-            output_root = (self.settings.project_root / output_root).resolve()
+        output_root = self.settings.output_root
         job_dir = output_root / sku.sku / ("_MOCK" if job.mock_mode else "run") / job.job_id
         job_dir.mkdir(parents=True, exist_ok=True)
 
@@ -145,7 +154,5 @@ class Orchestrator:
         job.counts = counts
 
     def job_dir(self, job: JobRecord) -> Path:
-        output_root = self.settings.output_dir
-        if not output_root.is_absolute():
-            output_root = (self.settings.project_root / output_root).resolve()
-        return output_root / job.sku / ("_MOCK" if job.mock_mode else "run") / job.job_id
+        root = self.settings.output_root
+        return root / job.sku / ("_MOCK" if job.mock_mode else "run") / job.job_id
