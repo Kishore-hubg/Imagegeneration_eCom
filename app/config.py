@@ -7,8 +7,9 @@ import re
 import tempfile
 from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 HEX_RE = re.compile(r"^#[0-9A-F]{6}$")
@@ -78,6 +79,22 @@ class Settings(BaseSettings):
 
     higgsfield_poll_interval_seconds: int = 3
     higgsfield_poll_timeout_seconds: int = 300
+
+    @model_validator(mode="before")
+    @classmethod
+    def _blank_means_unset(cls, data: Any) -> Any:
+        """Treat an empty environment variable as absent.
+
+        A Vercel project variable created without a value arrives as "", which
+        would otherwise fail int/bool parsing and take the whole app down.
+        """
+        if isinstance(data, dict):
+            return {
+                key: value
+                for key, value in data.items()
+                if not (isinstance(value, str) and not value.strip())
+            }
+        return data
 
     @property
     def project_root(self) -> Path:

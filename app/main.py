@@ -86,6 +86,9 @@ async def _boot() -> None:
 
     if settings.mock_mode:
         logger.warning("MOCK_MODE=true — using acceptance-reference images, not live generation")
+    elif settings.is_serverless:
+        # Nothing here can generate, so don't spend credentialed calls per cold start.
+        logger.warning("Serverless runtime — skipping Higgsfield preflight")
     else:
         await _preflight_higgsfield(settings)
 

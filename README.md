@@ -93,8 +93,15 @@ substituting Gemini — use this for any run whose output is presented as Higgsf
 
 ## Vercel deployment (catalogue only)
 
-`vercel.json` routes every path to `api/index.py`, which re-exports the FastAPI
-app. The deployed site serves the UI, the SKU catalogue, brand rules and channel
+Live at https://imagegeneration-e-com.vercel.app
+
+Deployment is zero-config: Vercel detects FastAPI and builds one function that
+serves every route, so there is no `vercel.json`. **Do not add a catch-all
+rewrite** — Vercel now passes the rewritten path to the app, so `/(.*)` →
+`/api/index` makes every route 404. `.vercelignore` keeps `Staples Assets/` and
+the PDFs out of the bundle, which is what holds the upload to ~900 KB.
+
+The deployed site serves the UI, the SKU catalogue, brand rules and channel
 targets — **image generation is disabled there**, and each card says so. Card
 thumbnails come from `app/static/thumbnails/`, a 590 KB pre-rendered copy that
 ships with the build; locally the same route prefers the freshly generated ones.
@@ -113,6 +120,10 @@ degrades its SKU (`can_generate: false`), a failed boot is reported through
 writes goes under `/tmp` instead of the read-only deployment directory.
 `STRICT_ASSETS` controls this and defaults to `false` only on Vercel/Lambda, so
 a missing asset is still a hard failure locally.
+
+Settings also treat an empty environment variable as unset. The Vercel project
+has every variable defined with a blank value, and `""` cannot parse as an `int`
+or `bool` — without that rule, `Settings()` raises and the whole app fails.
 
 To run the full pipeline against a public URL, deploy the container image to a
 host with a persistent disk and a real browser rather than a serverless function.
