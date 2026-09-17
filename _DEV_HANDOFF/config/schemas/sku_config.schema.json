@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://infovision.com/staples-poc/sku_config.schema.json",
+  "title": "SKU configuration",
+  "description": "One per SKU. Drives the entire pipeline run for that product. Validate every config against this at app startup - a malformed config should crash the app on boot, not fail halfway through a demo.",
+  "type": "object",
+  "required": ["sku", "config_version", "status", "brand_ruleset", "display_name", "hero_image", "shots"],
+  "additionalProperties": true,
+
+  "properties": {
+    "sku": { "type": "string", "pattern": "^[0-9]+$" },
+    "model": { "type": "string" },
+    "config_version": { "type": "string" },
+    "status": { "type": "string", "description": "Free text. All four configs are currently 'COMPLETE - ready to build against'." },
+    "brand_ruleset": { "enum": ["staples", "coastwide"] },
+    "display_name": { "type": "string" },
+    "short_name": { "type": "string" },
+    "card_label_for_landing_page": { "type": "string" },
+    "selling_uom": { "type": "string" },
+
+    "regulatory_class": { "type": "string" },
+    "claim_policy": {
+      "enum": ["APPROVED_ONLY_STRICT", "APPROVED_ONLY", "APPROVED_PREFERRED"],
+      "description": "STRICT and APPROVED_ONLY both make the claim lint blocking. APPROVED_PREFERRED logs a warning instead. Both Coastwide chemical SKUs are STRICT or ONLY."
+    },
+    "claim_policy_note": { "type": "string" },
+
+    "hero_image": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": { "type": "string", "description": "Relative to ASSET_ROOT. Must resolve to an existing file at load time." },
+        "px": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "description": { "type": "string" },
+        "background_verified": { "type": "string" },
+        "is_authoritative_product_reference": { "type": "boolean" },
+        "resolution_note": { "type": "string" },
+        "source_note": { "type": "string" },
+        "alternate_hero": { "type": "string" },
+        "format": { "type": "string", "description": "'psd' on the two heroes that are PSD files. Absent means PNG." },
+        "how_to_read": { "type": "string", "description": "Present on PSD heroes. Pillow reads the flattened composite directly - Image.open(path).convert('RGB'). No psd-tools, no layer access." },
+        "png_fallback": { "type": "string", "description": "Present on PSD heroes. A 1000px PNG to fall back to if PSD reading fails. Log loudly when used - the main image then becomes a 2.4x upscale." },
+        "why_this_angle": { "type": "string" }
+      }
+    },
+
+    "additional_product_references": {
+      "type": "object",
+      "description": "Finished production images. Used as acceptance oracles and as secondary nano-banana references. Keys are symbolic names referenced from scene_prompt.input_images.",
+      "additionalProperties": { "type": "string" }
+    },
+
+    "source_documents": { "type": "object", "additionalProperties": { "type": "string" } },
+    "asset_inventory": { "type": "object" },
+    "asset_tracker_flags": { "type": "object" },
+
+    "approved_source_strings": {
+      "type": "object",
+      "description": "The closed set of text the claim lint validates against. Every visible string in every rendered overlay must trace to a value in here or in its own shot's overlay_text."
+    },
+
+    "shots": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/shot" }
+    },
+
+    "shot_count": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "integer" },
+        "disabled": { "type": "integer" },
+        "total_if_all_enabled": { "type": "integer" },
+        "meets_6_to_8_rule": { "type": "boolean" }
+      }
+    },
+
+    "pipeline_mix": { "type": "object" }
+  },
+
+  "$defs": {
+    "shot": {
+      "type": "object",
+      "required": ["shot_id", "enabled", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "shot_id": { "type": "string", "pattern": "^SKU_[0-9]+$" },
+        "enabled": { "type": "boolean" },
+        "disabled_reason": {
+          "type": "string",
+          "description": "Required whenever enabled is false. Only one shot is currently disabled: Power Cleaner SKU_6 (the regulatory back label), because it is a pure asset passthrough that exercises no AI."
+        },
+        "brief_shot_name": { "type": "string" },
+        "purpose": { "type": "string" },
+        "stack_template": {
+          "type": "string",
+          "description": "Dotted path into the brand ruleset's stack_templates object, e.g. 'lifestyle_context.in_use_focal_point'. Must resolve.",
+          "pattern": "^[a-z_]+\\.[a-z0-9_]+$"
+        },
+
+        "type": {
+          "enum": ["hero_passthrough", "graphic_only", "graphic_only_with_generated_tiles", "photo_overlay", "photo_only", "asset_passthrough"],
+          "description": "photo_only = nano-banana + Gemini gate, then stop. The passed photo IS the finished shot - no Claude call, no overlay, no composite. Used for shots whose brief says 'No callout needed'."
+        },
+        "text_provenance": {
+          "type": "string",
+          "description": "REQUIRED on every shot. Where this shot's visible words came from. APPROVED = verbatim from the brief or the Asset Tracker's live listing copy. PUBLISHED_ART = verbatim from Staples' own finished image for this shot (approved, but not evidenced in any document in the folder). PLACEHOLDER_POC = written by InfoVision to unblock the shot; internal POC only, requires a placeholder_declaration block. NONE = the shot carries no text. The value may carry a short trailing qualifier after the keyword (e.g. 'APPROVED - declared shortenings, see shortening_rule').",
+          "pattern": "^(APPROVED|PUBLISHED_ART|PLACEHOLDER_POC|NONE)"
+        },
+        "placeholder_declaration": {
+          "type": "object",
+          "description": "REQUIRED whenever text_provenance begins with PLACEHOLDER_POC. This is what makes invented copy auditable rather than invisible.",
+          "required": ["authorized_by", "what_is_invented", "constraint_applied", "must_appear_in", "replace_before"],
+          "properties": {
+            "authorized_by": { "type": "string" },
+            "what_is_invented": { "type": "string" },
+            "constraint_applied": {
+              "type": "string",
+              "description": "Must record that the placeholder states no quantified promise and no regulated instruction - no dilution ratio, application distance, contact time, kill claim, certification, refund period or warranty term."
+            },
+            "consistency_note": { "type": "string" },
+            "must_appear_in": { "type": "array", "items": { "type": "string" } },
+            "replace_before": { "type": "string" }
+          }
+        },
+        "originated": {
+          "type": "boolean",
+          "description": "true when InfoVision chose this shot rather than the client's brief. Surface it in the UI or package README so the client can see which shots were our editorial call. All 7 Hyken shots are originated; so are ExpressMop SKU_7 and Power Cleaner SKU_8."
+        },
+        "anti_repetition_note": {
+          "type": "string",
+          "description": "Present on lifestyle shots. Names the shot this one must NOT resemble and the axes on which it differs - building type, flooring, light, camera distance, crop, person vs no person. Check it when reviewing output."
+        },
+        "type_rationale": { "type": "string" },
+
+        "overlay_text": {
+          "description": "Null for hero_passthrough and for disabled shots. Otherwise an object whose shape varies by shot - it is passed to Claude serialized, so no fixed schema is imposed. It MUST carry a source_string or source_strings field naming the approved origin.",
+          "type": ["object", "null"]
+        },
+        "layout_direction": { "type": ["string", "null"], "description": "Null for hero_passthrough and photo_only - neither draws anything." },
+
+        "scene_prompt": {
+          "type": ["object", "null"],
+          "description": "Null for graphic_only, hero_passthrough and asset_passthrough. REQUIRED for photo_overlay, photo_only and graphic_only_with_generated_tiles.",
+          "required": ["template", "reserved_zone", "aspect_ratio"],
+          "properties": {
+            "template": {
+              "type": "string",
+              "description": "Sent to nano-banana VERBATIM. Do not reformat, summarize or append to it."
+            },
+            "reserved_zone": {
+              "enum": ["upper_left_third", "bottom_third", "top_quarter_and_bottom_quarter", "left_quarter_and_right_quarter", "none - this is a texture source sheet, not a composed scene"],
+              "description": "KNOWN LIMITATION: this closed list has no right-hand or top-only variants, but four shots reserve the upper-RIGHT third or the TOP third. Those shots use the nearest available token and carry a `reserved_zone_note` saying so - the PROMPT text is always authoritative over the enum value. Either extend this enum with 'upper_right_third' and 'top_third' and correct those four shots, or mirror the bounds check per shot. Extending the enum is the cleaner fix and is recommended. Affected: Power Cleaner SKU_8, ProGel SKU_3, ProGel SKU_4, Hyken SKU_5."
+            },
+            "reserved_zone_note": {
+              "type": "string",
+              "description": "Present when the enum token does not literally describe the region the prompt reserves. Read it before implementing the bounds check for that shot."
+            },
+            "aspect_ratio": { "type": "string", "pattern": "^[0-9]+:[0-9]+$" },
+            "input_images": {
+              "type": "array",
+              "maxItems": 8,
+              "items": {
+                "type": "string",
+                "description": "Symbolic name: 'hero_image', or 'additional_product_references.<key>'. Resolve against this config. Hero first."
+              }
+            },
+            "post_processing": { "type": "string" }
+          }
+        },
+
+        "fidelity_gate": {
+          "type": "object",
+          "description": "Per-shot overrides for the Gemini gate. Absent means all four criteria apply - default to strict.",
+          "properties": {
+            "check_product_identity": { "type": "boolean", "default": true }
+          }
+        },
+
+        "render_targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["RT_MAIN_WHITE", "RT_SECONDARY_SQUARE"] }
+        },
+
+        "acceptance_reference": {
+          "type": ["string", "null"],
+          "description": "Path to Staples' own finished version of this shot, for side-by-side comparison. ALSO what MOCK_MODE returns - which is why mock artifacts must be watermarked or namespaced so they can never be mistaken for generated output."
+        },
+
+        "is_primary_demo_shot": { "type": "boolean" },
+        "demo_note": { "type": "string" },
+        "blocker": { "type": "string" },
+        "how_to_unblock": { "type": "string" },
+        "source_cell": { "type": "string" },
+        "known_delta_from_reference": { "type": "object" },
+        "spelling_correction": { "type": "object" },
+        "headline_note": { "type": "string" },
+        "asset_dependency": { "type": "string" },
+        "hard_constraint": { "type": "string" },
+        "added_by": { "type": "string" },
+        "flag_for_client_review": { "type": "boolean" },
+        "why_this_shot_exists": { "type": "string" },
+        "client_review_question": { "type": "string" },
+        "note": { "type": "string" },
+        "note_on_shot_id": { "type": "string" }
+      },
+
+      "required": ["shot_id", "enabled", "type", "text_provenance"],
+
+      "allOf": [
+        {
+          "if": { "properties": { "enabled": { "const": false } }, "required": ["enabled"] },
+          "then": { "required": ["disabled_reason"] }
+        },
+        {
+          "if": { "properties": { "text_provenance": { "pattern": "^PLACEHOLDER_POC" } }, "required": ["text_provenance"] },
+          "then": { "required": ["placeholder_declaration"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "photo_only" } }, "required": ["type"] },
+          "then": {
+            "required": ["scene_prompt"],
+            "properties": { "overlay_text": { "const": null } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "photo_overlay" } }, "required": ["type"] },
+          "then": { "required": ["scene_prompt", "layout_direction"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "hero_passthrough" } }, "required": ["type"] },
+          "then": { "properties": { "overlay_text": { "const": null }, "scene_prompt": { "const": null } } }
+        }
+      ]
+    }
+  },
+
+  "$comment": "ADDITIONAL VALIDATION THAT A SCHEMA CANNOT EXPRESS - implement these in code at startup: (1) every hero_image.path and acceptance_reference resolves to an existing file under ASSET_ROOT - note two heroes are .psd and are read via Pillow's flattened composite; (2) every stack_template dotted path resolves inside the referenced brand ruleset; (3) enabled shot count is between 6 and 8 inclusive for all four SKUs (expected: ExpressMop 8, Power Cleaner 8, ProGel 6, Hyken 7); (4) every scene_prompt.input_images symbolic name resolves against this config; (5) shot_id values are unique within the file; (6) shot_count.enabled matches the actual count of enabled shots - it is hand-maintained and easy to let drift; (7) every PLACEHOLDER_POC shot's invented strings are collected at boot so the run summary and package README can list them."
+}

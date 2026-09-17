@@ -1,0 +1,280 @@
+{
+  "sku": "24636223",
+  "model": "ST63291-CC",
+  "config_version": "1.0",
+  "status": "COMPLETE - ready to build against",
+  "supersedes": "sku_24636223_progel.TABLED.json - delete that file; this one replaces it.",
+  "authored": "2026-09-15, on Pratyoosh's go-ahead. Built from the brief's own six-shot plan, which was present all along.",
+
+  "brand_ruleset": "staples",
+  "display_name": "Staples ProGel Elite Retractable Gel Pens, Fine Point 0.7mm, Black Ink, 2 Pack",
+  "short_name": "ProGel Elite Metal Barrel Pen",
+  "card_label_for_landing_page": "Staples ProGel Elite Pen",
+  "selling_uom": "2/Pack",
+
+  "regulatory_class": "none - general merchandise",
+  "claim_policy": "APPROVED_PREFERRED",
+  "claim_policy_note": "Not a regulated product, so the claim lint logs rather than blocks. Even so, every string in this config traces to the brief's FINAL APPROVED column or the Asset Tracker's live listing copy - nothing here is invented. `text_provenance` is recorded per shot.",
+
+  "hero_image": {
+    "path": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_0.png",
+    "px": [3000, 3000],
+    "background_verified": "pure white RGB(255,255,255) at frame corners",
+    "description": "Two elements on pure white: the pen on its red-and-black Staples ProGel Elite blister card on the left, and the bare pen standing upright on the right. This is the style guide's 'product with package' main-image case, and the brief's general note asks for the carousel to echo the packaging.",
+    "is_authoritative_product_reference": true,
+    "psd_alternative": "Assets/PDP Imagery/24636223_0.psd - also 3000x3000, readable via Pillow. The PNG is sufficient; no need for the PSD on this SKU.",
+    "resolution_note": "3000x3000. Best hero resolution of the four SKUs; comfortably exceeds RT_MAIN_WHITE."
+  },
+
+  "additional_product_references": {
+    "_note": "FINISHED production images, not raw input. Ground truth for acceptance comparison and secondary references for nano-banana. See the style-conflict warning below before using them as a visual model.",
+    "feature_callouts":   "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_1.png",
+    "refillable":         "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_2.png",
+    "ink_on_paper":       "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_3.png",
+    "desk_lifestyle":     "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_4.png",
+    "hand_writing":       "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_5.png"
+  },
+
+  "style_conflict_warning": {
+    "issue": "All five finished reference panels use a dark CHARCOAL GRADIENT banner with ALL-CAPS white type. The 8.17.26 Staples style guide forbids both - 'Don't use gradients' (section 1.3) and 'Capitalize only the very first letter of the sentence or phrase' (section 4.2).",
+    "resolution": "FOLLOW THE STYLE GUIDE, NOT THE ART. Use a flat Slate #262020 fill where the reference uses a gradient, and sentence case where the reference uses caps. The generated output will deliberately NOT match the reference on these two points.",
+    "why_this_is_a_feature": "It is worth showing Sandeep directly. A pipeline driven by a machine-readable ruleset cannot drift from the brand the way a manual process does. The side-by-side on this SKU makes that argument better than any slide could.",
+    "also": "Reference panel _2 misspells 'separately' as 'seperately'. Do not reproduce it."
+  },
+
+  "source_documents": {
+    "creative_brief": "Staples Assets/Staples ProGel Metal Body sku 24636223/Staples_ProGel Metal Body_NPD_Creative Brief.xlsx  (sheet BRIEF, row 8)",
+    "spec_sheet": "Staples Assets/Staples ProGel Metal Body sku 24636223/SBGProdSpec_V6_Class_724 - Metal Progel-20250722.xlsx",
+    "asset_tracker": "Staples Assets/Asset Tracker.xlsx  (row 8)",
+    "tech_pack": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/Techpack/  -- glob '*Tech Pack-R0.pdf'; the filename contains mojibake from a mangled (TM) character",
+    "packaging_artwork": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/Packaging Artwork/ST63291_ProGel Pen Metal Barrel_UPDATED COLOR-2.pdf"
+  },
+
+  "client_style_direction": {
+    "source_cell": "BRIEF!AR8",
+    "verbatim": "Just a general note, this carousel should be representative similarly like the packaging. Dark gray and red",
+    "interpretation": "Palette direction for the whole stack: Slate #262020 as the dominant dark, Staples Red #E42A11 as the accent, on the guide's default white background. The guide forbids gradients, so 'dark gray' is a FLAT Slate fill.",
+    "style_guide_page_reference": "BRIEF!AN8 points at 'page 15' - the Staples guide's Design elements section 5.1/5.2, Numbers and Color callouts. Consult it for the callout treatments used on SKU_1."
+  },
+
+  "approved_source_strings": {
+    "_note": "Column M of the brief - 'FINAL APPROVED Attributes, Claims, Inclusions' - is fully populated for this SKU. Eleven lines. This is the richest approved-claims data of all four SKUs and it is the authority here.",
+    "final_approved_claims": [
+      "Black metal barrel, 0.7mm Tip, Black Ink",
+      "ProGel Ink system",
+      "Ultra-smooth, quick-dry ink prevents skipping and smudging",
+      "ProGel ergonomic, molded grip to provide optimal comfort for all-day use",
+      "Sleek metal barrel with metal accents for a more premium writing experience",
+      "Refillable with ProGel ink refills (sold separately) to save $ and reduce waste",
+      "Carbon steel clip is durable and returns to shape after extension",
+      "Quick dry technology prevents smudging",
+      "Tested and proven not to leak during airplane travel",
+      "Long-lasting acid-free ink with up to 800 meters of pen use (that's a half mile!)",
+      "Tested better than the competition for smoothness"
+    ],
+    "product_name": "ProGel Elite",
+    "anchor_bar_differentiator": "Metal Barrel",
+    "front_of_pack_romance_copy": "Ultra smooth gel ink / Quick dry technology prevents smudging",
+    "product_attributes": "Black / Fine 0.7mm / 2 Pens",
+    "back_of_pack_romance_copy": "Ultra smooth gel ink / Quick dry technology prevents smudging / Ergonomic grip for comfort / Long-lasting",
+    "pack_size_inclusions": "2 pens",
+    "product_dimensions": "N/A - correctly so. The style guide says dimensions shots are for furniture, 'not for a pen'.",
+    "packaging_description": "Trapped blister card",
+    "competitive_national_brand": "Sharpie S-Gel Metal RT (Staples SKU 24461717)",
+    "headliner": "Where style meets performance. Experience premium writing with the Staples ProGel Elite Pen, featuring a sleek metal barrel and ultra-smooth ink.",
+    "marketplace_bullets": [
+      "Premium black-ink gel pen with sleek black metal barrel construction",
+      "Ultra-smooth writing, tested better than the competition",
+      "0.7mm tip delivers precise lines",
+      "Quick-dry ink technology prevents smudging",
+      "Ergonomic, molded grip ensures comfortable writing sessions",
+      "Durable carbon steel clip returns shape after extension",
+      "Refillable with ProGel ink refills",
+      "Long-lasting ink offers up to 800 meters of use (that's half a mile!)",
+      "Leak-proof performance during air travel",
+      "Convenient 2-pack"
+    ],
+    "specs": {
+      "pen_point_size": "0.7mm",
+      "point_type": "Fine",
+      "ink_type": "Gel",
+      "ink_color": "Black",
+      "barrel_material": "Metal",
+      "barrel_color": "Black",
+      "pack_size": "2 Pack",
+      "retractable": "Yes",
+      "erasable": "No",
+      "series_or_collection": "ProGel Elite"
+    }
+  },
+
+  "source_typos_corrected": [
+    { "cell": "BRIEF!AW8", "brief_spelling": "prvents", "corrected_to": "prevents", "justification": "Obvious typo. The brief's own FINAL APPROVED column spells it 'prevents' twice." },
+    { "cell": "BRIEF!AY8", "brief_spelling": "seperately", "corrected_to": "separately", "justification": "Obvious typo. The brief's FINAL APPROVED column spells it 'separately'. Staples' finished art reproduces the typo; do not." }
+  ],
+
+  "shots": [
+    {
+      "shot_id": "SKU_0",
+      "enabled": true,
+      "brief_shot_name": "SKU_0 - No callout",
+      "purpose": "Marketplace main image. Pen with its blister card on pure white, no text.",
+      "stack_template": "main_image.product_with_package",
+      "type": "hero_passthrough",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "No generation. The brief says 'No callout' and asks the carousel to echo the packaging - the existing hero already is exactly that shot. Recompose onto the RT_MAIN_WHITE canvas at >= 85% fill.",
+      "template_justification": "The style guide names 'pen thickness' as an explicit case for showing the package alongside the product (section 8.1, Product with package).",
+      "overlay_text": null,
+      "scene_prompt": null,
+      "render_targets": ["RT_MAIN_WHITE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_0.png"
+    },
+    {
+      "shot_id": "SKU_1",
+      "enabled": true,
+      "brief_shot_name": "SKU_1",
+      "purpose": "Feature callouts. The pen with leader lines to three specific construction features.",
+      "stack_template": "education.features_benefits",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Premium metal barrel",
+        "callouts": [
+          { "label": "Ergonomic molded grip", "source": "ProGel ergonomic, molded grip to provide optimal comfort for all-day use" },
+          { "label": "Carbon steel clip",     "source": "Carbon steel clip is durable and returns to shape after extension" },
+          { "label": "Fine tip 0.7mm",        "source": "Black metal barrel, 0.7mm Tip, Black Ink" }
+        ],
+        "source_string": "Premium Metal Barrel (header) / Ergonomic molded grip / Carbon steel clip / Fine tip 0.7mm",
+        "source_cell": "BRIEF!AU8",
+        "note": "All three labels are verbatim from the brief's own shot cell, and each is additionally corroborated by a FINAL APPROVED claim line. The brief marks 'Premium Metal Barrel' as '(header)' - that parenthetical is an instruction to the designer, not copy, so it is not rendered."
+      },
+      "layout_direction": "White background. Slate #262020 sentence-case headline across the top. Two pens laid diagonally across the middle band - one showing the grip and tip, one showing the clip. Three thin Staples Red #E42A11 leader lines from the reserved margins to the grip, the clip and the tip, each ending in a small label set in Slate. Labels sit in the clear margins, never on the pen.",
+      "scene_prompt": {
+        "template": "A clean product photograph on a pure white seamless background showing two identical slim black metal retractable gel pens laid diagonally across the middle of the frame, well separated, one angled to show its textured rubber grip section and fine writing tip, the other angled to show its metal pocket clip. The pens must match the reference image exactly in color, finish, proportion and branding - matte black metal barrel with a subtle metallic accent ring and a dark textured grip. Even, soft, shadowless studio lighting with a faint contact shadow. No text, no labels, no props, no hands, no background elements. IMPORTANT: leave the top quarter and the bottom quarter of the frame as clean, completely empty pure white space with nothing in them - these bands are reserved for a headline and callout labels that will be added afterwards, so no part of either pen may enter them.",
+        "reserved_zone": "top_quarter_and_bottom_quarter",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.feature_callouts"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_1.png"
+    },
+    {
+      "shot_id": "SKU_2",
+      "enabled": true,
+      "brief_shot_name": "SKU_2",
+      "purpose": "Ink performance. A macro of the pen laying down a line on paper, with the ink claim in the clear area.",
+      "stack_template": "education.detail_zoom_in",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Ultra-smooth and quick drying ink",
+        "sub_headline": "prevents skipping and smudging",
+        "source_string": "Ultra-smooth and quick drying ink (header) / prvents skipping and smudging",
+        "source_cell": "BRIEF!AW8",
+        "typo_corrected": "'prvents' -> 'prevents'",
+        "split_rule": "The brief gives a header plus a supporting line. Rendered as Slate headline plus a lighter Slate sub-line. No rewording."
+      },
+      "layout_direction": "Headline block in the reserved clean upper-left area, left-aligned, Slate #262020 sentence case; sub-line beneath at roughly 55% of headline size. A thin Staples Red #E42A11 rule sits between headline and sub-line - the guide's own device on this kind of panel. Nothing crosses the pen or the drawn line.",
+      "scene_prompt": {
+        "template": "A close-up product photograph: the tip of a slim black metal retractable gel pen resting on a sheet of bright white paper in the lower right of the frame, having just drawn a single smooth flowing curved black line across the paper toward the lower left. Shallow depth of field with the pen tip and the line sharp. The pen must match the reference image exactly in color, finish and proportion - matte black metal barrel with a dark textured grip. Soft even daylight from the upper left, clean white paper, subtle paper texture. No text, no handwriting, no letters, no words, no other objects, no hands. IMPORTANT: leave the entire upper-left third of the frame as clean, empty, evenly-lit plain white paper with nothing on it - no line, no shadow, no texture detail. This area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.ink_on_paper"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_3.png"
+    },
+    {
+      "shot_id": "SKU_3",
+      "enabled": true,
+      "brief_shot_name": "Sku_3",
+      "purpose": "Refillability. The pen shown with its ink refills, with the value message.",
+      "stack_template": "education.contents_whats_in_the_box",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Refillable to save money and reduce waste",
+        "footnote": "*Ink sold separately",
+        "source_string": "Refillable to save money and reduce waste (header) / *Ink sold seperately",
+        "source_cell": "BRIEF!AY8",
+        "typo_corrected": "'seperately' -> 'separately'",
+        "corroborating_claim": "Refillable with ProGel ink refills (sold separately) to save $ and reduce waste"
+      },
+      "layout_direction": "White background. Slate #262020 sentence-case headline across the top, max two lines. The pen and two slim refill cartridges arranged diagonally in the lower two thirds. Footnote in small Slate type at the bottom left. The refills are the only place blue may appear, and only because a blue refill is a real product in the line - see the constraint below.",
+      "asset_constraint": "The brief's Product Attributes for THIS SKU are 'Black / Fine 0.7mm / 2 Pens' - this is a black-ink 2-pack. Blue refills exist as separate sibling SKUs (ST63293-CC). Showing a blue refill is truthful but risks implying this pack contains blue ink. SAFEST: show two BLACK refills. Staples' own reference for this shot shows one blue and one black; if you match that, the footnote must make the separate-purchase point clearly.",
+      "scene_prompt": {
+        "template": "A clean product photograph on a pure white seamless background showing a slim black metal retractable gel pen laid diagonally in the lower right, with two slim black ink refill cartridges laid parallel beside it to the left, all well separated with clear white space between them. The pen must match the reference image exactly in color, finish, proportion and branding. The refills are simple slim plastic cartridges with a fine metal tip and a black ink reservoir. Even, soft, shadowless studio lighting. No text, no labels, no packaging, no props, no hands, no background elements. IMPORTANT: leave the entire top third of the frame as clean, completely empty pure white space with nothing in it - this band is reserved for a headline that will be added afterwards.",
+        "reserved_zone": "bottom_third",
+        "reserved_zone_note": "The prompt reserves the TOP third; the enum value 'bottom_third' is the closest available token in the schema's closed list. Either extend the enum with 'top_third' or mirror the bounds check for this shot. Flagged for the developer.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.refillable"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_2.png"
+    },
+    {
+      "shot_id": "SKU_4",
+      "enabled": true,
+      "brief_shot_name": "Sku_4",
+      "purpose": "All-day use, in use. A hand writing with the pen, with the three no-smudge benefits called out.",
+      "stack_template": "lifestyle_context.in_use_focal_point",
+      "type": "photo_overlay",
+      "is_primary_demo_shot": true,
+      "demo_note": "The flagship photo_overlay for this SKU. A human hand mid-action is the hardest thing in the set for a generation model to get right, which makes it the most convincing shot when it works - and the Gemini gate is what stops a malformed hand reaching the output.",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Perfect for all day use",
+        "items": ["No smudge", "No smear", "No bleed"],
+        "source_string": "Perfect for all day use / No smudge / No smear / No bleed",
+        "source_cell": "BRIEF!BA8"
+      },
+      "layout_direction": "Headline block in the reserved clean upper-right area, right-aligned, Slate #262020 sentence case. The three items beneath it as a stacked list, each preceded by a small Staples Red #E42A11 outline checkmark icon at 1.5px stroke. Nothing crosses the hand or the pen.",
+      "scene_prompt": {
+        "template": "A photorealistic close-up scene: a person's right hand holding a slim black metal retractable gel pen in a natural writing grip, mid-stroke, writing on a white document lying on a warm light-wood desk surface. The hand enters from the lower right and is seen from a three-quarter angle above. Only the hand and forearm cuff are visible - no face, no body. The pen must match the reference image exactly in color, finish, proportion and branding - matte black metal barrel with a dark textured grip. Soft warm natural daylight from a window to the left, shallow depth of field with the pen tip sharp. Clean uncluttered desk. No readable text or letterforms on the document, no logos, no other objects, no competitor branding. IMPORTANT: leave the entire upper-right third of the frame as clean, uncluttered, evenly-lit empty desk and paper space with no objects, no strong texture and no busy detail - this area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "reserved_zone_note": "The prompt reserves the upper-RIGHT third; 'upper_left_third' is the closest available enum token. Mirror the bounds check or extend the enum. Flagged for the developer.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.hand_writing"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_5.png"
+    },
+    {
+      "shot_id": "SKU_5",
+      "enabled": true,
+      "brief_shot_name": "Sku_5 - No callout needed",
+      "purpose": "Natural setting. The pen at rest on a desk, no text - the style guide's own worked example for this template.",
+      "stack_template": "lifestyle_context.natural_setting_focal",
+      "type": "photo_only",
+      "type_rationale": "The brief says 'No callout needed', so there is no overlay step and no Claude call. nano-banana generates, the Gemini gate checks, and the passed photo IS the finished shot. The purest demonstration of the generation capability with nothing layered on top to distract from it.",
+      "text_provenance": "NONE - no text on this shot",
+      "template_justification": "The style guide's worked example for Natural Setting (Focal) is literally 'a pen sitting on a desk conveys / highlights the pen without concern over the size of the pen relative to a conference room'. This shot is the guide's own illustration of the template.",
+      "anti_repetition_note": "This must NOT look like SKU_4. SKU_4 is a tight macro of a hand mid-stroke, shallow depth of field, pen in motion. SKU_5 is a wider still life with no person at all, the pen at rest, a fuller view of the desk. Different distance, different subject, no hand.",
+      "overlay_text": null,
+      "layout_direction": null,
+      "scene_prompt": {
+        "template": "A photorealistic still-life product scene: a slim black metal retractable gel pen resting at a slight diagonal on a dark brown leather desk pad, beside the corner of a closed spiral-bound notebook with a dark cover, on a warm light-wood desk. Shot from a low three-quarter angle, slightly above. The pen must match the reference image exactly in color, finish, proportion and branding - matte black metal barrel with a subtle metallic accent ring, a dark textured grip and a metal pocket clip. Soft warm natural daylight raking across from the left, gentle highlight along the length of the barrel, shallow depth of field with the pen sharp and the background falling away. Warm, premium, understated styling. No people, no hands, no readable text, no logos other than those already on the pen, no other objects, no competitor branding.",
+        "reserved_zone": "none - this is a texture source sheet, not a composed scene",
+        "reserved_zone_note": "No overlay is applied to this shot, so nothing needs reserving. The enum's 'none' token is reused; its wording mentions texture sheets only because that was its first use. Read it as 'no reservation required'.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.desk_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples ProGel Metal Body sku 24636223/Assets/PDP Imagery/Original-24636223_4.png"
+    }
+  ],
+
+  "shot_count": { "enabled": 6, "disabled": 0, "total_if_all_enabled": 6, "meets_6_to_8_rule": true },
+
+  "pipeline_mix": {
+    "hero_passthrough": 1,
+    "graphic_only": 0,
+    "graphic_only_with_generated_tiles": 0,
+    "photo_overlay": 4,
+    "photo_only": 1,
+    "note": "FIVE generated photographs and not a single flat graphic card. This is the most photography-heavy SKU in the set and therefore the best showcase of nano-banana specifically. It is also the only Staples-brand SKU with a complete plan, so it is what proves the pipeline is not just a Coastwide-orange trick.",
+    "why_no_graphic_only_shots": "The brief's six-shot plan simply doesn't call for one - every slot is product or lifestyle photography. That is a property of this product, not an omission. A pen has no dimensions shot (the guide forbids it), no what's-in-the-box beyond the refills, and no surfaces grid."
+  },
+
+  "demo_recommendation": "Run this SKU second, after ExpressMop. ExpressMop proves the full branching pipeline with a complete reference set; ProGel proves it works on a different brand, a different product category, and a photography-only stack - including a human hand, which is the shot most likely to impress and most likely to fail."
+}

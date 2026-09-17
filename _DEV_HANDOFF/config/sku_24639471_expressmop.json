@@ -1,0 +1,277 @@
+{
+  "sku": "24639471",
+  "model": "CW63248",
+  "config_version": "1.2",
+  "status": "COMPLETE - ready to build against",
+  "changelog": {
+    "1.2  2026-09-16": "Demo preference: drop trust-guarantee graphic and weak text cards. SKU_2 / SKU_4 / SKU_5 / SKU_6 converted to photo_only work-life scenes (retail, hotel, office lobby, healthcare) so most of the stack shows the product in real use like SKU_7. No text overlays on lifestyle frames. Playwright covers remaining photo_overlay education shots (SKU_1 contents, SKU_3 features).",
+    "1.1  2026-09-15": "Pratyoosh's decisions applied. SKU_6 guarantee enabled with declared placeholder copy. SKU_7 added - a school-corridor work-style shot on the new photo_only path. text_provenance added to every shot. 6 enabled -> 8 enabled.",
+    "1.0  2026-09-14": "Initial config."
+  },
+  "brand_ruleset": "coastwide",
+  "display_name": "Coastwide Professional ExpressMop Spray Mop, Gray, Kit",
+  "short_name": "ExpressMop Starter Kit",
+  "card_label_for_landing_page": "Coastwide ExpressMop Starter Kit",
+  "selling_uom": "KIT",
+
+  "regulatory_class": "EPA-regulated chemical component (multi-surface floor cleaner cartridges)",
+  "claim_policy": "APPROVED_ONLY",
+  "claim_policy_note": "This kit contains an EPA-regulated cleaning chemical. Every visible word must come from approved_source_strings below, from Staples' own published art for that shot, or from an explicitly declared placeholder - each shot states which via its `text_provenance` field. No new safety, performance, efficacy or certification claim may be authored. Case-normalization to sentence case is permitted; rewording is not.",
+  "text_provenance_policy": "See the identical block in sku_24321408_powercleaner.json. Same four values, same lint behavior, same hard limit: a placeholder may never state a quantified promise or a regulated instruction.",
+
+  "hero_image": {
+    "path": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_0.png",
+    "px": [3000, 3000],
+    "description": "Assembled ExpressMop on a pure white background, full product visible, shot straight on, slight angle. No text, no props.",
+    "is_authoritative_product_reference": true
+  },
+
+  "additional_product_references": {
+    "_note": "These are FINISHED production images, not raw input. Use them as ground truth for acceptance comparison, and as secondary product-appearance references for nano-banana (they show the product from other angles and in use).",
+    "components_flat_lay": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_1.png",
+    "feature_callouts":    "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_3.png",
+    "in_use_lifestyle":    "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_5.png",
+    "benefits_card":       "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Bynder default-24639471_2.png",
+    "surfaces_card":       "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Bynder default-24639471_4.png"
+  },
+
+  "source_documents": {
+    "creative_brief": "Staples Assets/Coastwide ExpressMop sku 24639471/Coastwide - Express Mop_brief (2).xlsx  (sheet BRIEF, row 8)",
+    "spec_sheet": "Staples Assets/Coastwide ExpressMop sku 24639471/SBGProdSpec_V6_Class_5793 - Wet Mops V2.xlsx",
+    "asset_tracker": "Staples Assets/Asset Tracker.xlsx  (row 6)",
+    "certification_badge": "Staples Assets/Coastwide ExpressMop sku 24639471/Packaging Artwork/I&ISaferChoice_BLACK.PNG"
+  },
+
+  "approved_source_strings": {
+    "_note": "Verbatim from the creative brief BRIEF sheet row 8 and the Asset Tracker row 6. Nothing may be rendered that is not derived from one of these.",
+    "must_have_attributes": "Sturdy mop system. 2-Piece pole is easy to assemble. Lightweight and durable. 18\" mop head. Easy fill bottle with cartridge technology. Closed loop system reduces the opportunity for chemicals to come in direct contact with users. Eliminates dilution errors.",
+    "pack_inclusions": "1 Mop; 1 Microfiber Wet Mop Pad 5 in. x 19.25 in / 12.7 cm x 48.9 cm; 12 Multi-Surface Floor Cleaner Cartridges 0.33 FL. OZ. / 9.7 mL Each; Total 4 FL. OZ. / 118.3 mL",
+    "third_party_seal": "EPA Safer Choice",
+    "marketplace_bullets": [
+      "ExpressMop spray mop system for quick and efficient cleaning",
+      "Includes twelve multi-surface floor cleaner cartridges",
+      "Features a reusable 18\" microfiber wet mop pad for wide coverage",
+      "Ergonomic trigger for even solution dispensing",
+      "Easy-fill bottle with cartridge technology",
+      "Constructed with a durable aluminum pole for long-lasting use",
+      "Designed for indoor use on hard floors",
+      "Suitable for all hard floors not harmed by water including sealed wood, linoleum, terrazzo, marble, vinyl, rubber, and tile flooring",
+      "Dimensions: 11”L x 3.5”W x 57.6”H",
+      "Compatible with Coastwide Professional ExpressRefill Multi-Surface Floor Cleaner (CW053ER24-A), Disposable Mop Pads (CW63404), and Launderable Mop Pads (CW61066)"
+    ],
+    "headliner": "Tackle high-traffic areas effortlessly with the Coastwide ExpressMop Starter Kit, designed for quick and efficient cleaning."
+  },
+
+  "shots": [
+    {
+      "shot_id": "SKU_0",
+      "enabled": true,
+      "brief_shot_name": "SKU_0 - Product image, no callouts",
+      "purpose": "Marketplace main image. The product alone on pure white, no text of any kind.",
+      "stack_template": "main_image.product_without_package",
+      "type": "hero_passthrough",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "No generation. The main image must be the real product on pure white with no text. Regenerating it would risk violating PRODUCT_ACCURACY for zero gain. The pipeline recomposes the existing hero onto the RT_MAIN_WHITE canvas: matte to pure white, scale so the product fills >= 85% of the frame, center, output 2400x2400.",
+      "overlay_text": null,
+      "scene_prompt": null,
+      "render_targets": ["RT_MAIN_WHITE"],
+      "acceptance_reference": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_0.png"
+    },
+    {
+      "shot_id": "SKU_1",
+      "enabled": true,
+      "brief_shot_name": "SKU_1 - Show all components of starter kit - mop, mop pad, floor cleaner cartridges",
+      "purpose": "Contents / what's in the box. Show every component the buyer receives, with a counted list.",
+      "stack_template": "education.contents_whats_in_the_box",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Starter kit includes:",
+        "items": [
+          { "count": "1",  "label": "Mop" },
+          { "count": "1",  "label": "Microfiber wet mop pad" },
+          { "count": "12", "label": "Floor cleaner cartridges" }
+        ],
+        "source_string": "Starter Kit Includes: 1 Mop / 1 Microfiber Wet Mop Pad / 12 Multi-Surface Floor Cleaner Cartridges",
+        "source_cell": "BRIEF!AV8"
+      },
+      "layout_direction": "Components arranged left-to-right across the upper two thirds on white. Number + label callouts sit in a row beneath, aligned under their component. Numbers in Orange #FF8200 Bold, labels in Charcoal #414140 Regular. Headline centered above the callout row.",
+      "scene_prompt": {
+        "template": "A flat product photograph on a pure white seamless background, showing the three components of this floor-mop starter kit laid out side by side and separated with clear space between them: the assembled spray mop standing upright in the center, a rectangular gray microfiber wet mop pad laid flat on the left, and a neat grid of twelve small cleaning-solution cartridges arranged on the right. Every component must match the reference image exactly in color, material and proportion. Even, soft, shadowless studio lighting. No text, no labels, no logos other than those already on the product, no props, no hands, no background elements. IMPORTANT: leave the entire bottom third of the frame as clean, empty, pure white space with nothing in it - this area is reserved for text that will be added afterwards.",
+        "reserved_zone": "bottom_third",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.components_flat_lay"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_1.png"
+    },
+    {
+      "shot_id": "SKU_2",
+      "enabled": true,
+      "brief_shot_name": "SKU_2 - Work-life: retail / big-box aisle maintenance",
+      "purpose": "Work-style lifestyle. Product in use in a retail aisle — replaces the benefits graphic card so the stack shows real-world use instead of text/icons.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: graphic benefits cards rasterized poorly and under-sold the product. Prefer a clean in-use photo with no overlay.",
+      "replaced_from": {
+        "was": "graphic_only benefits card",
+        "reason": "User requested more work-life images like SKU_7 and less text-based description cards"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_5 (office lobby) or SKU_7 (school corridor). This is a retail big-box aisle: tall shelving with soft-focus merchandise, polished concrete or large tile floor, cool overhead store lighting, worker mid-mop in the aisle.",
+      "scene_prompt": {
+        "template": "A photorealistic retail big-box store aisle: a facilities worker in a dark polo and khaki trousers, seen from a three-quarter angle, mopping polished light-gray concrete flooring with this exact spray mop between two tall shelving rows. Merchandise on the shelves is softly out of focus with no readable labels or logos. Cool overhead fluorescent lighting mixed with distant daylight from the store front. The mop must match the reference image exactly in color, shape, proportion and branding, held at a natural working angle with the mop head flat on the floor. Clean, professional color grading. No visible brand logos anywhere in the scene other than those already on the mop itself. No other cleaning products, no competitor branding, no signage with readable text, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.in_use_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_3",
+      "enabled": true,
+      "brief_shot_name": "SKU_3 - Highlight key product features with overlaid image bubbles",
+      "purpose": "Feature callouts. Product in the center with circular zoom-in bubbles pointing to four specific features.",
+      "stack_template": "education.detail_zoom_in",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED - declared shortenings, see shortening_rule",
+      "overlay_text": {
+        "callouts": [
+          { "label": "Ergonomic spray trigger",     "source": "Ergonomic trigger evenly dispenses cleaning solution" },
+          { "label": "Easy fill tank",              "source": "Tank can be filled anywhere you have water" },
+          { "label": "7k sq. ft. per refill",       "source": "Clean up to 7k sq. ft. with one refill" },
+          { "label": "Pre-measured refill cartridges", "source": "Cartridge eliminates dilution errors" }
+        ],
+        "source_string": "Clean up to 7k sq. ft. with one refill / Ergonomic trigger evenly dispenses cleaning solution / Cartridge eliminates dilution errors / Tank can be filled anywhere you have water",
+        "source_cell": "BRIEF!AZ8",
+        "shortening_rule": "Each callout label is a SHORTENING of its source string, not a rewrite. Words may be dropped and a noun phrase kept; no word may be added that changes or strengthens the claim. Max 5 words per label. The `source` field above is the string the claim lint checks against."
+      },
+      "layout_direction": "Product standing vertically in the center-right on white. Two circular zoom-in bubbles on the left with thin leader lines to the trigger and the tank; two on the right with leader lines to the mop head and cartridges. Labels in Charcoal #414140 beside each bubble. Bubbles are circular crops of the product itself - never place a bubble ON the product.",
+      "scene_prompt": {
+        "template": "A clean product photograph on a pure white seamless background showing this spray mop standing upright, angled slightly, occupying the center of the frame vertically. The product must match the reference image exactly in color, material, proportion and branding. Even, soft, shadowless studio lighting. No text, no labels, no props, no hands, no background elements. IMPORTANT: keep a generous margin of clean, empty, pure white space down the full left edge and the full right edge of the frame - roughly the outer quarter on each side must be completely empty. These margins are reserved for callout graphics that will be added afterwards, so nothing may extend into them.",
+        "reserved_zone": "left_quarter_and_right_quarter",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.feature_callouts"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_3.png"
+    },
+    {
+      "shot_id": "SKU_4",
+      "enabled": true,
+      "brief_shot_name": "SKU_4 - Work-life: hotel / hospitality lobby",
+      "purpose": "Work-style lifestyle. Product in use on hard flooring in a hospitality lobby — replaces the surfaces swatch graphic that failed palette lint and leaned on text labels.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: surface-swatch graphic cards failed lint and under-performed visually. Prefer an in-use lifestyle photo that implies hard-floor use without text.",
+      "replaced_from": {
+        "was": "graphic_only_with_generated_tiles surface swatches",
+        "reason": "User requested more work-life images; swatch card produced broken/empty deliverables"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_2 (retail aisle), SKU_5 (office lobby glass), SKU_6 (healthcare), or SKU_7 (school corridor). This is a hotel lobby: warm wood or stone flooring, soft ambient lighting, seating in soft focus background, no readable signage.",
+      "scene_prompt": {
+        "template": "A photorealistic upscale hotel lobby interior: a facilities worker in a charcoal polo and dark trousers, seen from the side at a comfortable distance, mopping polished warm stone tile flooring with this exact spray mop. Soft warm ambient lighting, a seating area softly blurred in the background, tall windows with sheer daylight. The mop must match the reference image exactly in color, shape, proportion and branding, held at a natural working angle with the mop head flat on the floor. Inviting hospitality color grading. No visible brand logos anywhere in the scene other than those already on the mop itself. No other cleaning products, no competitor branding, no readable signage or text of any kind, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.in_use_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_5",
+      "enabled": true,
+      "brief_shot_name": "SKU_5 - Work-life: office lobby product in use",
+      "purpose": "Flagship lifestyle shot. Product in use in a real commercial setting — no text overlay (same treatment as SKU_7).",
+      "stack_template": "lifestyle_context.in_use_focal_point",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "is_primary_demo_shot": true,
+      "demo_note": "THIS IS THE SHOT TO SHOW SANDEEP. Clean in-use photo with no overlay — matches the preferred work-life style of SKU_7.",
+      "type_rationale": "Demo preference 2026-09-16: drop text overlays on lifestyle frames. The photo itself carries the story.",
+      "replaced_from": {
+        "was": "photo_overlay with benefit headline",
+        "reason": "User prefers work-life images without text-based description overlays"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_2 (retail), SKU_4 (hotel), SKU_6 (healthcare), or SKU_7 (school). This is a modern office lobby: glass walls, glossy light-gray tile, worker cropped at the waist, cool daylight.",
+      "scene_prompt": {
+        "template": "A photorealistic commercial interior scene: a facilities worker seen from the waist down, in dark trousers and work shoes, mopping a large glossy light-gray tile floor with this exact spray mop, in a bright modern office lobby with floor-to-ceiling glass walls on the right and a white wall on the left. Natural daylight floods in from the glass; the polished floor shows a soft clean reflection. The mop must match the reference image exactly in color, shape, proportion and branding, held at a natural working angle with the mop head flat on the floor. Warm, inviting color grading. Walls white or light gray. No visible brand logos anywhere in the scene other than those already on the mop itself. No other cleaning products, no competitor branding, no signage, no readable text of any kind.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.in_use_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide ExpressMop sku 24639471/PDP Imagery/Original-24639471_5.png"
+    },
+    {
+      "shot_id": "SKU_6",
+      "enabled": true,
+      "brief_shot_name": "SKU_6 - Work-life: healthcare / clinic corridor",
+      "purpose": "Work-style lifestyle. Product in use in a healthcare corridor — replaces the satisfaction-guarantee trust graphic (no shield icon / placeholder copy).",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: drop trust-guarantee icon card entirely. Prefer product-in-use lifestyle over placeholder guarantee copy.",
+      "replaced_from": {
+        "was": "graphic_only satisfaction guarantee / trust panel",
+        "reason": "User explicitly does not want the trust guarantee icon; prefer work-life imagery"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "source_cell": "BRIEF!BE8",
+      "note_on_shot_id": "The brief labels this slot 'SKU_5' a second time - a numbering typo in the source file. Renumbered to SKU_6. Content changed in 1.2 from guarantee graphic to lifestyle photo.",
+      "anti_repetition_note": "Must NOT look like SKU_2 (retail), SKU_4 (hotel), SKU_5 (office lobby), or SKU_7 (school lockers). This is a healthcare clinic corridor: pale vinyl flooring, handrails, soft clinical lighting, calm empty hallway.",
+      "scene_prompt": {
+        "template": "A photorealistic healthcare clinic corridor: a facilities worker in light blue scrubs-style polo and dark trousers, seen in full figure partway down the hall, mopping pale vinyl tile flooring with this exact spray mop. Clean white walls, a continuous handrail on one side, soft diffuse clinical lighting, doors softly out of focus along the hallway. The mop must match the reference image exactly in color, shape, proportion and branding, held at a natural working angle with the mop head flat on the floor. Calm, clean color grading. No visible brand logos anywhere in the scene other than those already on the mop itself. No other cleaning products, no competitor branding, no readable signage or text of any kind, no patients, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.in_use_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_7",
+      "enabled": true,
+      "added_by": "InfoVision - NOT in the client brief",
+      "authorized_by": "Pratyoosh Patel, 15 Sep 2026 - 'focus on the lifestyle images / work style images'",
+      "brief_shot_name": "n/a - originated as an additional work-style shot",
+      "purpose": "Work-style / use cases. The mop working in a second, clearly different facility type, to show breadth of setting.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "type_rationale": "No overlay at all. nano-banana generates the scene, the Gemini gate checks it, and the passed photo IS the finished shot. No Claude call. This is the purest demonstration of the generation capability - nothing on top of it to distract from whether the product and the scene are right.",
+      "text_provenance": "NONE - no text on this shot",
+      "overlay_text": null,
+      "anti_repetition_note": "This must NOT look like SKU_5. SKU_5 is a glass-walled modern office lobby, worker cropped at the waist, cool daylight, glossy light-grey tile. SKU_7 is a school or healthcare corridor: vinyl flooring, lockers or handrails, warmer artificial light, full-figure worker at a distance. Different building type, different flooring, different light, different crop.",
+      "layout_direction": null,
+      "scene_prompt": {
+        "template": "A photorealistic interior scene in a school corridor: a facilities worker in a light blue polo shirt and dark trousers, seen in full figure from a distance down the corridor, mopping a long stretch of pale vinyl tile flooring with this exact spray mop. Rows of lockers line the left wall, a handrail runs along the right, natural light comes from a window at the far end of the corridor. The mop must match the reference image exactly in color, shape, proportion and branding, held at a natural working angle with the mop head flat on the floor. Warm, inviting color grading. Walls white or light gray. No visible brand logos anywhere in the scene other than those already on the mop itself. No other cleaning products, no competitor branding, no signage, no readable text of any kind, no people other than the worker.",
+        "reserved_zone": "none - this is a texture source sheet, not a composed scene",
+        "reserved_zone_note": "No overlay is applied to this shot, so no zone needs reserving. The enum's 'none' value is reused; its wording says 'texture source sheet' only because that was its original use. Treat it simply as 'no reservation required'.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.in_use_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    }
+  ],
+
+  "shot_count": { "enabled": 8, "disabled": 0, "total_if_all_enabled": 8, "meets_6_to_8_rule": true },
+
+  "pipeline_mix": {
+    "hero_passthrough": 1,
+    "graphic_only": 0,
+    "graphic_only_with_generated_tiles": 0,
+    "photo_overlay": 2,
+    "photo_only": 5,
+    "note": "v1.2 demo mix: hero + two photo_overlay education shots (contents, feature callouts) + five photo_only work-life scenes (retail, hotel, office lobby, healthcare, school). No trust-guarantee, no benefits/surfaces text cards, no text on lifestyle frames."
+  }
+}

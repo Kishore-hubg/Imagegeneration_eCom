@@ -1,0 +1,387 @@
+{
+  "sku": "990119",
+  "model": "ST63137",
+  "config_version": "1.2",
+  "status": "COMPLETE - ready to build against",
+  "supersedes": "sku_990119_hyken.TABLED.json - delete that file; this one replaces it.",
+  "authored": "2026-09-15. Shot plan ORIGINATED by InfoVision on Pratyoosh's instruction ('you can take the call by originating 6 to 8 from the style guide's furniture template'), because the client brief's shot columns are empty for this and all 45 chair SKUs in that file.",
+  "changelog": {
+    "1.2  2026-09-16": "Demo preference aligned with ExpressMop/Power Cleaner: drop trust/certifications graphic card. SKU_6 converted to photo_only commercial work-life scene. Keep dimensions (SKU_1) and education overlays — text completeness enforced in Claude prompts + lint.",
+    "1.0  2026-09-15": "Initial originated furniture shot plan."
+  },
+
+  "brand_ruleset": "staples",
+  "display_name": "Staples Hyken Ergonomic Mesh Swivel Task Chair, Black (ST63137)",
+  "short_name": "Hyken Ergonomic Task Chair",
+  "card_label_for_landing_page": "Staples Hyken Task Chair",
+  "selling_uom": "Each",
+
+  "regulatory_class": "none - general merchandise",
+  "claim_policy": "APPROVED_PREFERRED",
+  "claim_policy_note": "Not a regulated product, so the claim lint logs rather than blocks. Every string in this config nonetheless traces to the brief's Front-of-Pack copy, its Product Attributes field, the spec sheet's measured dimensions, or the Asset Tracker's live listing copy. Nothing is invented. `text_provenance` is recorded per shot.",
+
+  "ORIGINATION_NOTE": {
+    "what_was_originated": "The SHOT STRUCTURE only - which six shots, which stack template each uses, and which approved string goes on which shot.",
+    "what_was_NOT_originated": "Not one word of copy. Every rendered string is verbatim from the brief, the spec sheet or the live listing. The chair is the one SKU where the client supplied plenty of approved language but no shot list, so structure was the only gap.",
+    "template_selection_basis": "Section 8 of the Staples Digital Content Style Guide, restricted to the templates whose 'When to use' text applies to furniture. The guide names furniture explicitly for Dimensions and for Comparison vs self, and names a room scene as the case where scale matters - so those drove the plan.",
+    "flag_for_client": "Every shot below carries `originated: true`. Surface that in the UI or the package README so Sandeep can see which shots were our editorial call rather than his brief's."
+  },
+
+  "hero_image": {
+    "path": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/990119_0.psd",
+    "px": [3000, 3000],
+    "format": "psd",
+    "description": "The chair alone on pure white, front three-quarter angle, headrest attached, armrests visible, five-star base with casters. The classic catalogue hero angle.",
+    "is_authoritative_product_reference": true,
+    "how_to_read": "Pillow reads the PSD's flattened composite directly - `Image.open(path).convert('RGB')`. No psd-tools, no Photoshop. Verified: opens as a clean 3000x3000 RGB image on pure white.",
+    "png_fallback": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119-NAD-X_1.png  (1000x1000 - use only if PSD reading fails)",
+    "resolution_note": "RESOLVED. The PSD gives 3000x3000, comfortably exceeding RT_MAIN_WHITE's 2400x2400. No upscaling required.",
+    "why_this_angle": "Of the five white-background PSDs, 990119_0 is the only full-chair front three-quarter. 990119_1 is rear three-quarter, NAD-X_1 is a tighter crop that clips the base, NAD-X_6 shows two chairs, NAD-X_7 is an exploded parts view."
+  },
+
+  "additional_product_references": {
+    "_note": "FINISHED production images, not raw input. 23 exist in total - catalogued in full under asset_inventory. These six are the ones referenced by shots below.",
+    "adjustments_callouts":  "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_2-2.png",
+    "adjustment_points":     "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_3-2.png",
+    "mesh_detail":           "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_7.png",
+    "dimensions_infographic":"Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_Dims.png",
+    "home_office_lifestyle": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_0.png",
+    "seated_in_use":         "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_8.png"
+  },
+
+  "source_documents": {
+    "creative_brief": "Staples Assets/Staples Hyken/Staples - Chair ReBrand RePack_Brief - 10192024.xlsx  (sheet BRIEF, row 25 - shot columns AU..BL are EMPTY)",
+    "spec_sheet_primary": "Staples Assets/Staples Hyken/ST63137 Hyken Black SBGProdSpec_V6_Class_102 - Ergonomic Task Chairs_HL VN.xlsx  (sheet 'Chair Dimension')",
+    "spec_sheet_repack": "Staples Assets/Staples Hyken/ST63907 SBGProdSpec_V6_Class_102 - Ergonomic Task Chairs__New Package_20260506.xlsx",
+    "asset_tracker": "Staples Assets/Asset Tracker.xlsx  (row 4)",
+    "packaging_artwork": "Staples Assets/Staples Hyken/ST63907 Staples Hyken Ergonomic Task Chair-Black_OL.pdf",
+    "cad_not_needed": "990119-STAPLES-OFFICE_ARMCHAIR_HYKEN-BLACK.glb and UN59460_..._CAD_r1.stp. Out of scope for 2D, and the Asset Tracker flags the CAD paddles as facing the wrong way - do not use it as an angle reference."
+  },
+
+  "approved_source_strings": {
+    "front_of_pack_romance_copy": [
+      "Adjustable armrests and seat height for personalized support",
+      "Breathable mesh back ensures airflow for prolonged comfort",
+      "Tension knob customizes recline resistance; variable position tilt lock for personalized reclining.",
+      "Ergonomic design with adjustable lumbar support for stability and relief",
+      "Adjustable headrest enhances neck support"
+    ],
+    "product_attributes": ["Black", "5-Year Warranty", "275 lb weight capacity", "BIFMA Compliant"],
+    "product_name": "Hyken Ergonomic Task Chair",
+    "anchor_bar_differentiator": "Breathable Mesh",
+    "pack_size_inclusions": "1 chair",
+    "collection": "Hyken",
+    "collection_note": "The brief's own 'Collection (mandatory for furniture)' field is EMPTY. The Asset Tracker supplies 'Hyken'. Using that.",
+    "product_dimensions_from_brief": "45.2 - 49.7 in H x 27.1 in W x 27.2 in D  /  114.8 - 126.2 cm H x 68.8 cm W x 69 cm D",
+    "headliner": "Maximize the value in your workplace setup with the Staples Hyken ergonomic mesh task chair.",
+    "marketplace_bullets": [
+      "PACKAGING MAY VARY, SAME GREAT PRODUCT.",
+      "Task chair is a smart addition to any office space",
+      "Comes in black and features a mesh back and seat",
+      "Overall dimensions: 45.2 - 49.7\"H x 27.1\"W x 27.1\"D ; Seat dimension: 17.2 - 20.9\"H x 19.3\"W x 16.7\"D ; Back dimensions: 16.4\"W x 28.3 - 29.1\"H",
+      "Ergonomic office chair with 9 adjustment options for a personalized fit",
+      "Arms adjust up and down to ease pressure on neck and support shoulders",
+      "Features a swivel-tilt mechanism, 3-position tilt lock, and a tension knob that allows you to adjust the resistance of the chair for reclining, making it easier or harder to recline back",
+      "Assembly required",
+      "Features adjustable seat and arm height, height and angle adjustable headrest, lumbar support, tilt tension, and tilt lock",
+      "Rated for up to 275 lbs. based on an 8-hour workday",
+      "Meets or exceeds ANSI/BIFMA standards",
+      "5-year manufacturer limited warranty"
+    ]
+  },
+
+  "dimensions_source_of_truth": {
+    "_note": "DECIDED 2026-09-15 by Pratyoosh: use the FLOOR-REFERENCED figures, matching Staples' own dimensions infographic. Do not mix these with the spec sheet's panel-height figure.",
+    "use_these": {
+      "overall_height_min_in": 45.2,
+      "overall_height_max_in": 49.7,
+      "overall_width_in": 27.1,
+      "overall_depth_in": 27.2,
+      "seat_height_min_in": 17.2,
+      "seat_height_max_in": 20.9,
+      "seat_width_in": 19.3,
+      "seat_depth_in": 16.7,
+      "back_width_in": 16.4,
+      "back_height_min_in": 28.3,
+      "back_height_max_in": 29.1,
+      "arm_height_min_in": 25.1,
+      "arm_height_max_in": 31.1,
+      "weight_capacity_lb": 275
+    },
+    "source": "Asset Tracker row 4 spec attributes, cross-checked against the spec sheet's 'Chair Dimension' sheet row 15 ('Claimed (in)', averaged across 10 factory test samples) and against Staples' own finished 'Bynder default-990119_Dims.png'. All three agree to the tenth of an inch on every figure except back height - see below.",
+    "do_NOT_use": {
+      "spec_sheet_back_height_in": 23.4,
+      "why": "The spec sheet's 'Back Height' measures the backrest PANEL itself. The Asset Tracker's 28.3-29.1 in measures the backrest top FROM THE FLOOR. Both are correct; they measure different things. Staples' published infographic uses the floor-referenced figure, and mixing the two in one graphic would produce a chart that contradicts itself."
+    },
+    "tolerance_rule_from_spec_sheet": "Dimension < 30 inch: +/-6%. Dimension >= 30 inch: +/-3%.",
+    "unsourced_claims_on_staples_infographic_NOT_reproduced": [
+      "5'6\"-5'10\" suggested height",
+      "Fits under a desk height of 27\" when adjusted to min. height"
+    ],
+    "why_not_reproduced": "Neither appears in the brief, the spec sheet or the Asset Tracker. Same pattern as the ExpressMop benefit lines - approved copy living outside the folder. Request the source or leave them off. Leaving them off costs the shot nothing."
+  },
+
+  "resolved_conflicts": [
+    {
+      "issue": "Adjustment count",
+      "detail": "'Bynder default-990119_2.png' says '8 adjustment options'. 'Bynder default-990119_2-2.png' says '9 adjustment options'. 'Bynder default-990119_3-2.png' says '9 POINTS of adjustment'. Asset Tracker Bullet_Copy_5 says '9 adjustment options'.",
+      "DECIDED_2026-09-15": "Use 9. Confirmed by Pratyoosh.",
+      "flag_for_client": "A superseded 8-option asset is still live in Staples' library. Worth mentioning to Sandeep."
+    },
+    {
+      "issue": "Back height stated two ways",
+      "DECIDED_2026-09-15": "Use the floor-referenced figures. Confirmed by Pratyoosh. See dimensions_source_of_truth."
+    },
+    {
+      "issue": "Open PE note on the brief",
+      "detail": "BRIEF!V25 carries an unresolved product-engineering comment: 'Add detailed tilt lock position'.",
+      "handling": "The tilt-lock detail is covered by the approved Front-of-Pack line about the tension knob and variable position tilt lock, and by the Asset Tracker's '3-position tilt lock'. No shot depends on the unresolved note. No action needed."
+    }
+  ],
+
+  "shots": [
+    {
+      "shot_id": "SKU_0",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Marketplace main image. The chair alone on pure white, no text.",
+      "stack_template": "main_image.product_without_package",
+      "template_justification": "Style guide: 'Generally the default option.' A task chair needs no packaging context to be understood.",
+      "type": "hero_passthrough",
+      "text_provenance": "NONE - no text on this shot",
+      "overlay_text": null,
+      "scene_prompt": null,
+      "render_targets": ["RT_MAIN_WHITE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119-NAD-X_1.png"
+    },
+    {
+      "shot_id": "SKU_1",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Dimensions. Front and side elevations with measured callouts, so a buyer can judge fit.",
+      "stack_template": "education.dimensions",
+      "template_justification": "Style guide, section 8.3: 'Use when product size informs a customer decision - e.g. furniture, not for a pen.' Furniture is the guide's own named case. This is the single most clearly justified shot in the stack.",
+      "type": "graphic_only",
+      "type_rationale": "Precise measured data and leader lines. Nothing photographic to judge - it is exact by construction, so Claude draws it directly from the spec figures and the lint checks the numbers. No generation, no vision gate.",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Hyken dimensions",
+        "callouts": [
+          { "label": "Overall height", "value": "45.2\" - 49.7\"" },
+          { "label": "Overall width",  "value": "27.1\"" },
+          { "label": "Overall depth",  "value": "27.2\"" },
+          { "label": "Seat height",    "value": "17.2\" - 20.9\"" },
+          { "label": "Seat width",     "value": "19.3\"" },
+          { "label": "Seat depth",     "value": "16.7\"" },
+          { "label": "Back width",     "value": "16.4\"" },
+          { "label": "Back height",    "value": "28.3\" - 29.1\"" },
+          { "label": "Arm height",     "value": "25.1\" - 31.1\"" },
+          { "label": "Weight capacity","value": "275 lb" }
+        ],
+        "source": "dimensions_source_of_truth.use_these - Asset Tracker row 4, corroborated by the spec sheet and Staples' own published infographic."
+      },
+      "product_imagery_needed": {
+        "requirement": "Two chair silhouettes - front elevation and side elevation - as flat cutouts on white, to hang the dimension lines from.",
+        "how": "Use the existing PSDs rather than generating. Front elevation: 'Bynder default-990119-NAD-X_6.png' contains a clean straight-on front view (left of the two chairs) - crop it. Side elevation: 'Bynder default-990119-NAD-X_6.png' also contains a clean side view (right chair) - crop that. This avoids a generation call entirely and guarantees the silhouettes are the real product, which matters because dimension lines must land on real geometry.",
+        "fallback": "If cropping proves fiddly, 'Bynder default-990119_5.png' is Staples' own front-and-side elevation dimension diagram - use it as the layout reference, not as the output."
+      },
+      "layout_direction": "White background. Slate #262020 sentence-case headline top left. Front elevation on the left half, side elevation on the right half, both scaled to the same height. Dimension lines in Staples Red #E42A11 at 1.5px with the arrow start/end points shown in the guide's section 5.7. Labels in Slate, values in Slate Demibold. Weight capacity as a separate number callout in the bottom-right corner, per the guide's numbers-callout placement rule.",
+      "scene_prompt": null,
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_Dims.png"
+    },
+    {
+      "shot_id": "SKU_2",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Adjustment points. The chair with circular callouts to each adjustable component.",
+      "stack_template": "education.product_parts",
+      "template_justification": "Style guide, section 8.3: 'Use when there are different parts of a product to highlight - e.g. buttons, functional components.' A nine-point adjustable chair is the textbook case.",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "9 adjustment options",
+        "sub_headline": "for all day support",
+        "callouts": [
+          { "label": "Pivoting headrest",        "source": "Adjustable headrest enhances neck support" },
+          { "label": "Adjustable arm rests",     "source": "Adjustable armrests and seat height for personalized support" },
+          { "label": "Adjustable seat height",   "source": "Adjustable armrests and seat height for personalized support" },
+          { "label": "Adjustable lumbar support","source": "Ergonomic design with adjustable lumbar support for stability and relief" },
+          { "label": "Tilt & tension control",   "source": "Tension knob customizes recline resistance; variable position tilt lock for personalized reclining." }
+        ],
+        "source": "Headline from Asset Tracker Bullet_Copy_5 ('Ergonomic office chair with 9 adjustment options for a personalized fit'), shortened. Each callout label is a declared shortening of the Front-of-Pack line named in its `source` field.",
+        "count_decision": "9, not 8. See resolved_conflicts."
+      },
+      "layout_direction": "White background. Chair centered. Five circular zoom-in callouts arranged around it in the reserved left and right margins, each a circular crop of the relevant component with a thin Staples Red #E42A11 leader line to the part, and a small Slate label in a red-outlined pill beneath the circle. Headline in Staples Red Demibold and sub-line in Slate, both at the bottom centre. Guide rule: the circle container must NOT be Staples Red - use Slate or leave it unfilled.",
+      "scene_prompt": {
+        "template": "A clean product photograph on a pure white seamless background showing a black mesh-back ergonomic office task chair with an attached headrest, adjustable armrests and a polished five-star base with casters, seen straight on from the front, centered and occupying the middle half of the frame's width. The chair must match the reference image exactly in color, material, proportion and geometry - black mesh back and seat, black plastic armrests with silver accents, polished aluminium base. Even, soft, shadowless studio lighting with a faint contact shadow. No text, no labels, no props, no people, no background elements. IMPORTANT: keep a generous margin of clean, empty, pure white space down the full left edge and the full right edge of the frame - roughly the outer quarter on each side must be completely empty. These margins are reserved for callout graphics that will be added afterwards, so no part of the chair may extend into them.",
+        "reserved_zone": "left_quarter_and_right_quarter",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.adjustments_callouts"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_2-2.png"
+    },
+    {
+      "shot_id": "SKU_3",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Breathable mesh. A macro of the mesh back showing the weave, with the airflow benefit.",
+      "stack_template": "education.detail_zoom_in",
+      "template_justification": "Style guide, section 8.3: 'Use when it is helpful to provide further understanding of a specific detail - this could include material (texture/color/finish).' Mesh weave is a material detail, and 'Breathable Mesh' is the brief's own Anchor Bar Differentiator for this SKU - the single thing Staples chose to lead on.",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Breathable mesh back",
+        "sub_headline": "ensures airflow for prolonged comfort",
+        "source_string": "Breathable mesh back ensures airflow for prolonged comfort",
+        "source_cell": "BRIEF!U25",
+        "split_rule": "One approved Front-of-Pack line, split at the natural clause boundary. No rewording."
+      },
+      "layout_direction": "Headline block in the reserved clean upper-left area, left-aligned. Headline Staples Red #E42A11 Demibold, sub-line Slate #262020 Normal at roughly 55% of headline size, with a thin Staples Red rule between them. Nothing crosses the mesh surface.",
+      "scene_prompt": {
+        "template": "An extreme close-up macro photograph of the upper back panel of a black mesh office chair, filling the lower two thirds of the frame at a shallow raking angle, showing the fine woven black mesh weave in sharp detail with the black frame edge curving across one corner. Shallow depth of field, the weave sharp in the centre and softening toward the edges. Soft directional studio lighting from the upper left picking out the texture of the individual mesh strands. The material must match the reference image exactly - fine taut black knitted mesh over a matte black frame. No text, no labels, no props, no people, no logos. IMPORTANT: leave the entire upper-left third of the frame as a clean, uncluttered, evenly-lit soft neutral area with no weave detail, no frame edge and no busy texture - this area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.mesh_detail"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_7.png"
+    },
+    {
+      "shot_id": "SKU_4",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Room scene. The chair in a real home-office setting, so a buyer can judge scale and fit.",
+      "stack_template": "lifestyle_context.natural_setting_scene",
+      "template_justification": "Style guide, section 8.2: 'Best practice to include when it is helpful to understand scale.' A chair is bought partly on whether it suits the room, so the guide's scene variant applies rather than the focal one.",
+      "type": "photo_overlay",
+      "is_primary_demo_shot": true,
+      "demo_note": "The flagship lifestyle shot for this SKU. A chair in a furnished room is the kind of image that traditionally needs a photo shoot with set dressing - which is exactly the cost this pipeline is arguing it removes. Budget prompt-tuning time here.",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Adjustable armrests and seat height",
+        "sub_headline": "for personalized support",
+        "source_string": "Adjustable armrests and seat height for personalized support",
+        "source_cell": "BRIEF!U25",
+        "split_rule": "One approved Front-of-Pack line, split at the natural clause boundary."
+      },
+      "anti_repetition_note": "This must NOT look like SKU_5. SKU_4 is a wide empty room scene, residential, no person, chair at a distance beside a desk, cool-warm daylight from a window. SKU_5 is a close three-quarter crop of a seated person at a commercial desk. Different building type, different distance, person vs no person.",
+      "layout_direction": "Headline block in the reserved clean upper-left area, left-aligned. Headline Slate #262020 Demibold, sub-line Slate Normal. Placed on the plain wall area, never over the chair, the desk or the window.",
+      "scene_prompt": {
+        "template": "A photorealistic interior scene: a black mesh-back ergonomic office task chair with an attached headrest and a polished five-star base, positioned at a three-quarter angle beside a light oak desk in a bright modern home office. A window with sheer curtains sits on the right letting in soft warm daylight; the wall is white, the floor is pale wide-plank wood with a neutral woven rug under the desk. A closed laptop and a small potted plant sit on the desk. The chair must match the reference image exactly in color, material, proportion and geometry - black mesh back and seat, black armrests with silver accents, polished aluminium base with casters. Warm, inviting color grading. Walls white or light gray, furniture in light woods. No people. No visible brand logos anywhere in the scene. No competitor branding, no signage, no readable text of any kind. IMPORTANT: leave the entire upper-left third of the frame as clean, uncluttered, evenly-lit plain white wall with no objects, no shelving, no artwork, no strong texture and no busy detail - this area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.home_office_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_0.png"
+    },
+    {
+      "shot_id": "SKU_5",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Human context and in use. A person seated and working, conveying fit, posture and lumbar support.",
+      "stack_template": "lifestyle_context.human_context_and_scale",
+      "template_justification": "Style guide, section 8.2: 'Placing a person in the frame to communicate size and real-world relevance.' For a chair the person is not optional decoration - it is the only way to show fit and posture, which is what the lumbar and ergonomic claims are about.",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Ergonomic design with adjustable lumbar support",
+        "sub_headline": "for stability and relief",
+        "source_string": "Ergonomic design with adjustable lumbar support for stability and relief",
+        "source_cell": "BRIEF!U25",
+        "split_rule": "One approved Front-of-Pack line, split at the natural clause boundary."
+      },
+      "anti_repetition_note": "See SKU_4. Keep this one a closer crop, a commercial rather than residential setting, and person-led.",
+      "layout_direction": "Headline block in the reserved clean upper-right area, right-aligned. Headline Slate #262020 Demibold, sub-line Slate Normal. Must not cross the person or the chair.",
+      "scene_prompt": {
+        "template": "A photorealistic office scene: a woman in a white blouse and dark trousers seated upright and working at a light wood desk in a bright modern commercial office, seen from a three-quarter rear angle so the chair's mesh back, headrest and armrest are clearly visible supporting her, with her hands resting on a laptop keyboard. Soft daylight from a window out of frame to the left; the wall behind is plain off-white. The chair must match the reference image exactly in color, material, proportion and geometry - black mesh back and seat, black armrests with silver accents, polished aluminium base with casters. Warm neutral color grading. No visible brand logos anywhere in the scene, no competitor branding, no signage, no readable text of any kind. IMPORTANT: leave the entire upper-right third of the frame as clean, uncluttered, evenly-lit plain wall with no objects, no fixtures, no strong texture and no busy detail - this area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "reserved_zone_note": "The prompt reserves the upper-RIGHT third; 'upper_left_third' is the closest available enum token. Mirror the bounds check for this shot, or extend the enum with right-hand variants. Flagged for the developer.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.seated_in_use"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119_8.png"
+    },
+    {
+      "shot_id": "SKU_6",
+      "enabled": true,
+      "originated": true,
+      "purpose": "Work-style lifestyle. Chair in a busy commercial office bay — replaces the trust/certifications graphic panel.",
+      "stack_template": "lifestyle_context.natural_setting_scene",
+      "template_justification": "Demo preference 2026-09-16: capacity/warranty/BIFMA facts still live in listing copy; the marketplace gallery should show the product in a real workplace rather than a three-panel trust card.",
+      "type": "photo_only",
+      "type_rationale": "Aligned with ExpressMop/Power Cleaner: no trust/certifications icon card. Prefer product-in-context lifestyle over a graphic trust panel.",
+      "conversion_note": {
+        "was": "graphic_only trust_social_proof.certifications (275 lb / 5-year / BIFMA panels)",
+        "reason": "User preference: lifestyle-first for all products; drop weak trust graphics"
+      },
+      "text_provenance": "NONE - no text on this shot",
+      "overlay_text": null,
+      "anti_repetition_note": "Must NOT look like SKU_4 (empty residential home office, no person) or SKU_5 (close seated person crop). This is a wider commercial open-plan bay: multiple desks in soft focus, cooler fluorescent/LED lighting, chair empty in the foreground as the hero prop.",
+      "layout_direction": null,
+      "scene_prompt": {
+        "template": "A photorealistic commercial open-plan office: a black mesh-back ergonomic task chair with attached headrest and polished five-star base sits empty in the foreground at a three-quarter angle beside a light wood desk, with soft-focus rows of similar desks and monitors receding into a bright modern office bay. Cool neutral daylight mixed with overhead LED panels. The chair must match the reference image exactly in color, material, proportion and geometry — black mesh back and seat, black armrests with silver accents, polished aluminium base with casters. No people in the foreground. No visible brand logos, competitor branding, signage, or readable text of any kind. No shield icons, badges, or certification marks.",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.home_office_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/Bynder default-990119-NAD_4.png"
+    }
+  ],
+
+  "shot_count": { "enabled": 7, "disabled": 0, "total_if_all_enabled": 7, "meets_6_to_8_rule": true },
+
+  "pipeline_mix": {
+    "hero_passthrough": 1,
+    "graphic_only": 1,
+    "graphic_only_with_generated_tiles": 0,
+    "photo_overlay": 4,
+    "photo_only": 1,
+    "note": "v1.2 demo mix: hero + dimensions graphic (furniture needs exact specs) + four photo_overlay education/lifestyle frames + one photo_only commercial work-life scene. No trust/certifications graphic card."
+  },
+
+  "candidate_shots_considered_and_rejected": [
+    { "template": "comparison.vs_self", "why_rejected": "The guide's own example is 'different models of office chairs', and Staples has a finished 'HYKEN FAMILY' image comparing Hyken / Hyken Pro / Hyken XL. Strong fit - but it requires accurate hero imagery for the Pro and XL models, which are different SKUs not in this folder. Generating a plausible-looking Pro or XL would be inventing a product. Enable only if Staples supplies those heroes." },
+    { "template": "education.instructions_assembly", "why_rejected": "The Asset Tracker says 'Assembly required' and 'Full Assembly Required', but the guide says to use this template only when 'the ease of assembly is part of the value proposition'. Nothing in the brief or the listing frames assembly as a benefit - it is disclosed, not sold. Using it would invert the client's own positioning." },
+    { "template": "lifestyle_context.before_after", "why_rejected": "The guide's case is a product that 'visibly changes a customer's environment'. A chair replacing a chair is not a visible environmental change in the way a desk organizer or a floor cleaner is." },
+    { "template": "education.contents_whats_in_the_box", "why_rejected": "Pack inclusion is '1 chair'. Nothing to enumerate." },
+    { "template": "comparison.new_look", "why_rejected": "Tempting, because the brief is a REBRAND/REPACK project and Bullet_Copy_1 is literally 'PACKAGING MAY VARY, SAME GREAT PRODUCT.' But the old packaging artwork is not in this folder, so an old-vs-new shot cannot be built truthfully. Worth raising with Sandeep - if he supplies the old artwork this becomes a genuinely good shot, and it addresses a real customer confusion." }
+  ],
+
+  "asset_inventory": {
+    "finished_reference_images": 23,
+    "location": "Staples Assets/Staples Hyken/Staples 2026-09-03 161903/  (already unzipped - use the folder, not the .zip)",
+    "note": "Richest reference set of the four SKUs. Every one is FINISHED production art, not raw input.",
+    "catalogue": {
+      "Bynder default-990119_0.png":        "Lifestyle - chair in a bright modern home office, no text",
+      "Bynder default-990119_0-1.png":      "Product on white, front three-quarter",
+      "Bynder default-990119_1.png":        "Product on white, rear three-quarter",
+      "Bynder default-990119_2.png":        "Infographic - '8 adjustment options' - SUPERSEDED, see resolved_conflicts",
+      "Bynder default-990119_2-1.png":      "Infographic - 'HYKEN FAMILY' comparison: Hyken / Hyken Pro / Hyken XL",
+      "Bynder default-990119_2-2.png":      "Infographic - '9 adjustment options for all day support', 5 red circular callouts",
+      "Bynder default-990119_3.png":        "Product detail - tilt mechanism close-up on white",
+      "Bynder default-990119_3-1.png":      "Infographic - 'Ideal for all day cooling / breathable mesh back and seat'",
+      "Bynder default-990119_3-2.png":      "Infographic - '9 POINTS of adjustment' with leader lines to 6 labelled parts",
+      "Bynder default-990119_4.png":        "Feature panel - 'PIVOTING 2D HEADREST' with removable-headrest insets",
+      "Bynder default-990119_5.png":        "Dimensions diagram - front and side elevations with measured callouts",
+      "Bynder default-990119_5-1.png":      "Feature panel - 'ADJUSTABLE ARMRESTS' with motion arrows",
+      "Bynder default-990119_6.png":        "Feature panel - 'ADJUSTABLE LUMBAR' macro shot with motion arrows",
+      "Bynder default-990119_7.png":        "Feature panel - 'RESPONSIVE MESH' macro shot with airflow arrows",
+      "Bynder default-990119_8.png":        "Lifestyle - woman seated at a desk, 'RECLINE CONTROL / 3-POSITION LOCKING RECLINE'",
+      "Bynder default-990119_Dims.png":     "Full dimensions infographic - numbers match the spec sheet exactly",
+      "Bynder default-990119-NAD_4.png":    "Lifestyle - chair at a standing desk, 'Ergonomics meets economics...'",
+      "Bynder default-990119-NAD-X_1.png":  "Product on white, front three-quarter",
+      "Bynder default-990119-NAD-X_2.png":  "Product on white - recline motion sequence, ghosted positions",
+      "Bynder default-990119-NAD-X_3.png":  "Product detail - armrest and tilt paddle close-up",
+      "Bynder default-990119-NAD-X_5.png":  "Product detail - five-star base from above",
+      "Bynder default-990119-NAD-X_6.png":  "Product on white - two chairs, front view and side view - SOURCE FOR THE SKU_1 ELEVATIONS",
+      "Bynder default-990119-NAD-X_7.png":  "Product on white - exploded/disassembled parts view"
+    },
+    "psd_masters": "16 PSDs in the same folder, all 3000x3000, all readable via Pillow. 990119_0.psd is the hero."
+  },
+
+  "demo_recommendation": "Run this SKU third or fourth. It is the most complex product in the set and its dimensions shot is the one that best demonstrates that the pipeline reads real spec data rather than estimating - Staples' own infographic agrees with our numbers to the tenth of an inch, and that is a point worth making out loud."
+}

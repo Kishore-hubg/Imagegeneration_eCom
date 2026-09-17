@@ -1,0 +1,253 @@
+{
+  "ruleset_id": "staples",
+  "version": "1.0",
+  "brand_family": ["Staples", "Staples WP2.0", "Staples TECH", "TruRed"],
+  "source_document": "Staples Digital Content Style Guide 8.17.26.pdf",
+  "source_pages_distilled": "1-43 (full document)",
+  "distilled_on": "2026-09-14",
+
+  "palette": {
+    "staples_red":  { "hex": "#E42A11", "rgb": [228, 42, 17],  "pms": "485", "cmyk": [0, 97, 100, 0], "role": "primary brand color" },
+    "dark_red":     { "hex": "#54040E", "role": "deep accent / container" },
+    "bright_red":   { "hex": "#FF3F21", "role": "accent variation" },
+    "light_red":    { "hex": "#F8CAC3", "role": "tint / infographic fill" },
+    "pale_red":     { "hex": "#FFF4F2", "role": "lightest tint / background wash" },
+    "slate":        { "hex": "#262020", "role": "primary text color on white/light background; circle-container color on white/light background" },
+    "medium_gray":  { "hex": "#A3A09C", "role": "secondary / chart fill" },
+    "light_gray":   { "hex": "#E8E2DE", "role": "outer circle color for color-callout swatches; chart fill" },
+    "white":        { "hex": "#FFFFFF", "role": "default background for image stacks; text/icon color on red or slate containers" },
+    "paper":        { "hex": "#F5F3F0", "role": "alternate background-pattern color; vertical box containers; infographic/chart variation color" },
+    "black":        { "hex": "#000000", "role": "black" }
+  },
+
+  "source_errata": [
+    {
+      "location": "Style guide p.3 (section 1.1 Colors)",
+      "issue": "The 'White' swatch is printed with 'HEX #000000'. The swatch itself is white with a thin outline; #000000 is the Black value that lost its own label in the layout.",
+      "resolution_applied": "white = #FFFFFF, black = #000000.",
+      "needs_client_confirmation": true
+    }
+  ],
+
+  "color_rules": {
+    "default_stack_background": "#FFFFFF",
+    "on_red_or_slate_container": "Icons and text must be WHITE.",
+    "primary_text_on_light_background": "#262020 (Slate)",
+    "icon_color_on_white_or_light_background": "#E42A11 (Staples Red)",
+    "circle_container_color_on_light_background": "#262020 (Slate)",
+    "prohibited": [
+      "Do NOT use Staples Red for the circle container of any icon.",
+      "Do NOT use gradients anywhere.",
+      "Do NOT change the opacity of Staples Red (or any brand color).",
+      "Do NOT place black text or icons on a red background.",
+      "Do NOT place red text on a white background as a legibility shortcut - never compromise legibility.",
+      "Do NOT place red text or icons on a gray background."
+    ]
+  },
+
+  "typography": {
+    "primary_typeface": "Staples Norms Pro",
+    "web_fallback_stack": "'Staples Norms Pro', 'Norms Pro', Inter, 'Helvetica Neue', Arial, sans-serif",
+    "font_file_status": "NOT PROVIDED in the shared folder. See 06_DECISIONS_LOG.md - licensed font files must be supplied by Staples or a metrically-close substitute approved.",
+    "capitalization_rule": "Sentence case only. Capitalize the first letter of the sentence or phrase, plus proper nouns (e.g. Staples). All other words lowercase. NEVER Title Case. NEVER ALL CAPS.",
+    "hierarchy": {
+      "headline":      { "weight": "Demibold" },
+      "sub_headline":  { "weight": "Normal" },
+      "body_title":    { "weight": "Demibold" },
+      "body_sub_text": { "weight": "Normal" },
+      "body_text":     { "weight": "Medium" }
+    },
+    "reference_canvas_px": 1500,
+    "headline_size_by_word_count": [
+      { "words": 10, "size_px": 95,  "line_height_px": 115 },
+      { "words": 8,  "size_px": 105, "line_height_px": 121 },
+      { "words": 6,  "size_px": 115, "line_height_px": 118 },
+      { "words": 4,  "size_px": 128, "line_height_px": 130 },
+      { "words": 2,  "size_px": 130, "line_height_px": 95 },
+      { "words": 1,  "size_px": 130, "line_height_px": 95 }
+    ],
+    "size_limits_px": {
+      "min_any_text": 45,
+      "max_standard": 130,
+      "super_size": 180,
+      "super_size_rule": "180px is reserved for impact-first headlines where a single benefit owns the entire canvas. Limited to 1-2 words. Never exceed 180px. Any headline needing more words must be restructured to fit within the standard range."
+    },
+    "scaling_note": "All sizes above are for a 1500x1500 canvas. On any other canvas, multiply by (canvas_width / 1500). The min 45px and max 130px/180px limits scale with it.",
+    "alignment_rule": "Headline alignment is discretionary. Center when visual weight is symmetrical with no dominant element pulling to one side. Left- or right-align when product imagery, callouts, or graphic blocks give the headline a clear edge to anchor to. Contrast, balance and reading flow are the deciding factors.",
+    "mobile_rule": "Always prioritize mobile readability when selecting text sizes."
+  },
+
+  "brand_elements": {
+    "brand_icon": "The Staples staple mark.",
+    "icon_extensions": ["Filled circle", "Cropped circle", "Filled rounded rectangle"],
+    "circular_pattern_variants": ["Full circle", "Semi-circle", "Quarter", "Horizon"],
+    "pattern_color_choice": "Designers may select the red or light pattern based on what best serves the composition. Key considerations: product color, shape, contrast, brand application, visual cleanliness.",
+    "corner_radius_rule": "Every corner radius must align with the sample arc derived from the corner of the Staples icon. The arc does not change when scaled, so it is the visual reference at any size.",
+    "asset_status": "Vector brand icon and pattern files are NOT PROVIDED in the shared folder. See 06_DECISIONS_LOG.md."
+  },
+
+  "iconography": {
+    "library": "Streamline 3.0, Regular set (via Figma Streamline plugin)",
+    "style": "Outline icons with rounded corners",
+    "stroke_weight_px": 1.5,
+    "containers_allowed": ["no container", "slate container with white icon", "red box container with white icon", "icon only in red"],
+    "prohibited": [
+      "Do not use any other icon or illustration library.",
+      "Do not use a red icon box (use a circle instead).",
+      "Do not nest a shape inside a shape (e.g. red box containing a white circle)."
+    ],
+    "fallback": "If a needed icon does not exist in Streamline 3.0, use an icon visually similar to the style above.",
+    "asset_status": "Streamline icon files are NOT PROVIDED. For the POC, draw equivalent outline icons directly as inline SVG paths at 1.5px stroke, rounded caps and joins."
+  },
+
+  "infographic_templates": [
+    "Level / category / intensity scale (low - medium - high)",
+    "Product specification dial or gauge",
+    "Feature comparison (basic vs higher)",
+    "Phases / incremental data (percentage steps)",
+    "Comparative chart vs competitor",
+    "Comparative chart vs self (across own model range)",
+    "Sub-detail cluster (3 benefit tiles with icon + title + body)",
+    "Detailed step sequence (numbered 01, 02, 03)",
+    "Size chart table"
+  ],
+
+  "callout_placement_rules": {
+    "regular_feature_callouts": "Small pill/box callouts used for standard feature labels.",
+    "above_or_below_product": "Horizontal callout rows sit above or below the product image.",
+    "beside_product": "Vertical callout stacks sit beside the product image.",
+    "alone_on_canvas": "Full-width callouts used alone, or placed above a product image.",
+    "zoom_ins": "Circular zoom-in crops used to show a specific detail.",
+    "pairing_rule": "Pair unboxed callout styles with a red-patterned background. Pair red-boxed callout styles with a plain white or simpler-pattern background.",
+    "numbers_callout": "Use the product-count / pack-size number callout independently at the bottom-right or bottom-left corner of the canvas.",
+    "color_callout_sizing": "Use the WIDER callout when the canvas has a thinner/taller product image, or when paired with longer feature copy. Use the SMALLER callout when the product image takes up more space and the feature copy is short.",
+    "color_swatch_callout": "Use for color-focused presentations (color comparisons, multiple color options). The OUTER circle is Light Gray #E8E2DE."
+  },
+
+  "hard_rules": [
+    {
+      "id": "PRODUCT_ACCURACY",
+      "rule": "Products in every stack image must be consistent with the real product in color, detail and angle. A good reference of the product is required before generating any subsequent angle.",
+      "enforced_by": "Gemini fidelity gate (photo shots) + human review"
+    },
+    {
+      "id": "NO_OVERLAY_ON_PRODUCT",
+      "rule": "The product must always be in front. Never place text, icons, boxes or any other element over the product.",
+      "enforced_by": "Reserved-zone scene prompt + Claude overlay placement + overlay-bounds lint"
+    },
+    {
+      "id": "PRODUCT_BRANDED",
+      "rule": "The product should always be branded.",
+      "enforced_by": "Hero image is the source of truth; never regenerate the product itself"
+    },
+    {
+      "id": "SECONDARY_PRODUCTS_STAPLES",
+      "rule": "Surrounding and secondary products in a lifestyle frame should be Staples products. No other brand logo may appear on a product. If a Staples product is not used, the item must be left plain or replaced with something neutral.",
+      "enforced_by": "Scene prompt negative instruction + Gemini fidelity gate"
+    },
+    {
+      "id": "LIFESTYLE_COLOR_TEMPERATURE",
+      "rule": "Where possible choose warmer colors for environment elements. Walls: white or light gray. Tables and shelves: light woods.",
+      "enforced_by": "Scene prompt"
+    },
+    {
+      "id": "NO_STALE_CONTENT",
+      "rule": "Unless approved otherwise, do not include content that goes stale: review counts, star ratings, other metrics, or links.",
+      "enforced_by": "Shot config text is fixed and approved; no dynamic copy"
+    },
+    {
+      "id": "MARKETPLACE_COMPLIANCE",
+      "rule": "Testimonial and UGC content must be verified against Amazon compliance guidelines before use.",
+      "enforced_by": "Out of POC scope - no testimonial/UGC shots are configured"
+    }
+  ],
+
+  "lifestyle_imagery_rules": {
+    "wall_colors": ["white", "light gray"],
+    "surface_materials": ["light wood tables", "light wood shelves"],
+    "environment_temperature": "warm",
+    "modes": {
+      "environment_and_room_scene": "The product living in a space that matches where it actually gets used.",
+      "human_context_and_scale": "A person in the frame to communicate size and real-world relevance.",
+      "in_use_focal": "The product at the moment it delivers its value.",
+      "the_active_moment": "Freeze the single moment that makes the product's value undeniable.",
+      "before_and_after": "Use when the product visibly changes the customer's environment or workspace."
+    },
+    "composition_devices": ["red box container cutout", "overlapping images", "images placed to overlap the filled brand icon pattern"]
+  },
+
+  "packaging_sticker_rules": {
+    "when_appropriate": "Only where clear retail packaging is NOT present.",
+    "triggers": [
+      "Product has critical specs or use information not visible from the outside, and no retail packaging exists to highlight it.",
+      "Product's appearance alone does not reveal what it is, and no retail packaging exists.",
+      "Pack size or count cannot be determined from the hero image, and either no retail packaging exists or the packaging detail is too small to read."
+    ],
+    "scale": "Starting point: approximately 20% of the product's visible surface area. May be adjusted for readability but must not obscure important product features or branding.",
+    "placement_default": "Bottom-right.",
+    "placement_alternate": "Centered, for irregularly shaped products where bottom-right is not viable.",
+    "poc_status": "NOT IMPLEMENTED in the POC. No configured shot uses a packaging sticker."
+  },
+
+  "stack_templates": {
+    "main_image": {
+      "product_without_package": { "media": ["Product"], "when": "Generally the default option." },
+      "product_with_package":    { "media": ["Product"], "when": "Use when the product alone does not effectively convey key details and packaging text strengthens consumer selection. Examples: paper weight, pen thickness." },
+      "just_packaging":          { "media": ["Product"], "when": "Use when showing packaging AND product is redundant and would push both to be smaller and less effective. Example: a ream of paper." },
+      "360":                     { "media": ["Product"], "when": "Use when various angles are necessary to convey critical information. Discretionary based on availability of a 360 image, marketplace option, competitive landscape." }
+    },
+    "lifestyle_context": {
+      "natural_setting_focal": { "media": ["Lifestyle"], "when": "Best practice when the consumer already understands the product's scale and wants to see more of the product. E.g. a pen on a desk highlights the pen without raising scale questions." },
+      "natural_setting_scene": { "media": ["Lifestyle"], "when": "Best practice when understanding scale is helpful. E.g. a whiteboard seen relative to its environment. Discretion on including a person for scale." },
+      "in_use_focal_point":    { "media": ["Lifestyle"], "when": "Best practice to include - lets the consumer see the product in use. Discretion on natural setting vs in use vs both, and on showing multiple settings." },
+      "use_cases":             { "media": ["Lifestyle", "Infographics"], "when": "Use to show the different settings where the product can be used - commercial, home, school." },
+      "before_after":          { "media": ["Lifestyle"], "when": "Use when the product visibly changes a customer's environment or workspace." }
+    },
+    "education": {
+      "features_benefits":        { "media": ["Product", "Lifestyle", "Infographics"], "when": "Generally good to include, to convey the key value proposition of the product." },
+      "specifications":           { "media": ["Product", "Lifestyle", "Infographics"], "when": "Use when there are key details to convey such as quantity, weight." },
+      "detail_zoom_in":           { "media": ["Infographics"], "when": "Use when further understanding of a specific detail helps - material (texture/color/finish), function (mechanism/buttons)." },
+      "dimensions":               { "media": ["Product", "Lifestyle"], "when": "Use when product size informs a customer decision - e.g. furniture. NOT for a pen." },
+      "product_parts":            { "media": ["Product", "Lifestyle"], "when": "Use when there are different parts to highlight - buttons, functional components." },
+      "contents_whats_in_the_box":{ "media": ["Product", "Infographics"], "when": "Use when the product consists of multiple items, so the customer knows what is included and how many of each." },
+      "packaging":                { "media": ["Product"], "when": "Use when packaging is functionally useful as part of the product, or is a concise way to convey key decision details. Assess whether competitors include a packaging shot." },
+      "instructions_assembly":    { "media": ["Infographics"], "when": "Use when assembly is required and ease of assembly is part of the value proposition." },
+      "instructions_use":         { "media": ["Infographics"], "when": "Use when there is some complexity of use and ease of use is part of the value proposition." },
+      "instructions_cleaning":    { "media": ["Infographics"], "when": "Use when cleaning is a required aspect of use and ease of cleaning is part of the value proposition." },
+      "size_chart":               { "media": ["Infographics"], "when": "Use when there are different sizes and the size decision is nuanced - e.g. furniture by dimensions, not just different pack counts." }
+    },
+    "comparison": {
+      "available_options":  { "media": ["Infographics"], "when": "Use when there is a range of intuitive options to convey - pack size, color." },
+      "vs_self":            { "media": ["Infographics"], "when": "Use when the brand carries a range of options a consumer may be deciding between - e.g. different models of office chair." },
+      "vs_competitor":      { "media": ["Infographics"], "when": "Use when the product is differentiated versus competitors." },
+      "new_look":           { "media": ["Infographics"], "when": "Use when a product has undergone a packaging redesign." }
+    },
+    "trust_social_proof": {
+      "brand_story":    { "media": ["Infographics"], "when": "Generally good to use, to highlight the company or brand narrative - broadly or specific to a category." },
+      "certifications": { "media": ["Lifestyle", "Infographics"], "when": "Use when there are applicable safety, compliance or sustainability certifications, claims or marks." },
+      "testimonial":    { "media": ["Infographics"], "when": "Use when customer or press content is available and adds credibility. Verify Amazon compliance. Avoid content that goes stale." },
+      "ugc":            { "media": ["Infographics"], "when": "Use when available and there is discretionary value in making it real - not for a commoditized product, potentially valuable for a new or differentiated one. Ensure Amazon compliance." }
+    },
+    "cross_sell": {
+      "bundle_accessories": { "media": ["Product"], "when": "Use when there are products that logically go with the item being purchased." },
+      "related_products":   { "media": ["Product"], "when": "Use when the product is part of a broader category the customer may be interested in." }
+    }
+  },
+
+  "brand_voice": {
+    "source_document": "Staples Assets/Staples & Coastwide Brand Voice.docx",
+    "applies_to": ["Staples", "WP 2.0", "Staples TECH"],
+    "summary": "Professional, informative and persuasive. Shows expertise and a reassuring personality, emphasizing quality and functionality. Communicates with clear, detailed descriptions and a focus on practical benefits.",
+    "values": ["Expertise", "Clarity", "Persuasiveness", "Reliability", "Efficiency"],
+    "how_to_write": [
+      "Use specific and detailed language to describe features and benefits.",
+      "Highlight the practical advantages of products.",
+      "Use a formal and friendly tone.",
+      "Focus on efficiency and productivity enhancements.",
+      "Use comparative language to emphasize superiority."
+    ],
+    "tone": "Friendly",
+    "manner": "Knowledgeable",
+    "poc_constraint": "Voice guidance is for SELECTING and SHORTENING approved claim text only. Never author a new product claim. See the writing rules in 01_BUILD_INSTRUCTIONS."
+  }
+}

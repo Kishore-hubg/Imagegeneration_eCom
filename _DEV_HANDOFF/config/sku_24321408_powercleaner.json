@@ -1,0 +1,341 @@
+{
+  "sku": "24321408",
+  "model": "CW020EM03-B",
+  "config_version": "1.2",
+  "status": "COMPLETE - ready to build against",
+  "changelog": {
+    "1.2  2026-09-16": "Demo preference aligned with ExpressMop: drop trust-guarantee and weak text/graphic cards. SKU_2 / SKU_3 / SKU_4 / SKU_7 converted to photo_only work-life scenes. SKU_8 kept as lifestyle (text overlay removed → photo_only).",
+    "1.1  2026-09-15": "Pratyoosh's decisions applied. Hero repointed at the 3000x3000 PSD (resolution warning removed). SKU_4 instructions UNBLOCKED using captions from Staples' published art, with the unsourced spray-distance figure omitted. SKU_7 guarantee enabled with declared placeholder copy. SKU_8 changed from a 'Certifications' text panel to a commercial-kitchen work-style lifestyle shot. SKU_5 wording fixed to option A. 'Safe to use on:' retained. text_provenance added to every shot. 6 enabled -> 8 enabled.",
+    "1.0  2026-09-14": "Initial config."
+  },
+  "brand_ruleset": "coastwide",
+  "display_name": "Coastwide Professional Heavy-Duty Cleaner and Degreaser Power Clean Concentrate for ExpressMix, 3.25L, 2/Carton",
+  "short_name": "Power Clean Degreaser Concentrate",
+  "card_label_for_landing_page": "Coastwide Power Clean Degreaser",
+  "selling_uom": "2/Carton",
+
+  "regulatory_class": "EPA-regulated chemical product - heavy-duty alkaline cleaner and degreaser",
+  "claim_policy": "APPROVED_ONLY_STRICT",
+  "claim_policy_note": "BLOCKING RULE. This is a regulated chemical. Every visible word must come from approved_source_strings below, from Staples' own published art for that shot, or from an explicitly declared placeholder - and each shot states which via its `text_provenance` field. No new safety, performance, efficacy, dilution, surface-compatibility or certification claim may be authored, inferred or strengthened. No text or graphic element may be placed on or over the bottle label.",
+
+  "text_provenance_policy": {
+    "_note": "Added in v1.1 after Pratyoosh authorized placeholder copy for this internal POC. Provenance is tracked per shot so that 'which words are really Staples' words' is answerable at any time without re-reading the briefs.",
+    "APPROVED": "Verbatim from the creative brief or the Asset Tracker's live marketplace copy. Fully defensible.",
+    "PUBLISHED_ART": "Verbatim from Staples' own finished production image for that shot. Approved - they published it - but not evidenced in any document in this folder. Defensible, with provenance noted.",
+    "PLACEHOLDER_POC": "Written by InfoVision to unblock a shot. Internal POC only. Every instance carries a `placeholder_declaration` block and MUST be listed in manifest.json and in the package README.",
+    "NONE": "The shot carries no text.",
+    "lint_behavior": "The claim lint validates APPROVED and PUBLISHED_ART strings against their sources as normal. PLACEHOLDER_POC strings bypass source validation but are recorded, counted, and surfaced in the run summary - they are never silently blessed.",
+    "hard_limit_on_placeholders": "A placeholder may not state a quantified promise or a regulated instruction: no dilution ratio, no application distance, no contact time, no kill claim, no certification, no refund period, no warranty term. Those are the elements that cause real harm if a demo screenshot escapes the room. Generic reassurance is fine; a specific number is not."
+  },
+
+  "model_number_discrepancy": {
+    "creative_brief_says": "635800-67CWPR  (BRIEF!E6)",
+    "asset_tracker_and_label_artwork_say": "CW020EM03-B",
+    "resolution_applied": "CW020EM03-B is used. It matches the Asset Tracker, the live marketplace listing, and both packaging-artwork filenames. The brief value looks like a vendor/print job number (the label files are prefixed 630800-67CWPR), not the model.",
+    "needs_client_confirmation": true
+  },
+
+  "hero_image": {
+    "path": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/24321408_0.psd",
+    "px": [3000, 3000],
+    "format": "psd",
+    "description": "Two 3.25L green concentrate bottles with black Coastwide Professional labels, side by side on pure white, shot straight on. No text overlay.",
+    "is_authoritative_product_reference": true,
+    "source_note": "Extracted from 'Staples 2026-09-03 160437.zip'. The whole zip has been unpacked into the 'PDP Imagery' folder alongside it, so no unzip step is needed.",
+    "how_to_read": "Pillow reads the PSD's flattened composite directly - `Image.open(path).convert('RGB')`. No psd-tools, no Photoshop. Verified: opens as a clean 3000x3000 RGB image on pure white. Do NOT attempt layer-level access; the composite is all that is needed.",
+    "png_fallback": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_0.png  (1000x1000 - use only if PSD reading fails)",
+    "resolution_note": "RESOLVED. The PSD gives 3000x3000, which comfortably exceeds RT_MAIN_WHITE's 2400x2400. No upscaling required."
+  },
+
+  "additional_product_references": {
+    "_note": "FINISHED production images, not raw input. Ground truth for acceptance comparison and secondary references for nano-banana.",
+    "size_yield_card":      "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_1.png",
+    "features_card":        "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_2.png",
+    "surfaces_card":        "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_3.png",
+    "instructions_card":    "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_4.png",
+    "dispenser_lifestyle":  "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_4-1.png",
+    "back_label_flat":      "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_6.png"
+  },
+
+  "source_documents": {
+    "creative_brief": "Staples Assets/Coastwide Power Cleaner/Coastwide Midlab Phase 1_Creative Brief.xlsx  (sheet BRIEF, row 6)",
+    "spec_sheet": "NOT AVAILABLE - Asset Tracker records 'Spec Sheet not available in Enovia'",
+    "asset_tracker": "Staples Assets/Asset Tracker.xlsx  (row 10)",
+    "bottle_label": "Staples Assets/Coastwide Power Cleaner/630800-67CWPR-L11966_CW020EM03-B_PowerClnrDgrsr_Bottle Label.pdf",
+    "box_label": "Staples Assets/Coastwide Power Cleaner/630800-67CWPR-L11988_CW020EM03-B_PowerClnrDgrsr_BOX Label.pdf",
+    "pricing": "Staples Assets/Coastwide Power Cleaner/Product Launch Order w Pricing 2.4.26.xlsx  (not relevant to imagery)"
+  },
+
+  "asset_tracker_flags": {
+    "spec_sheet": "Spec Sheet not available in Enovia",
+    "photography": "Product changed - photography of old item not applicable",
+    "interpretation": "The 'photography not applicable' flag refers to studio photography of the OLD product. The Bynder images in the zip are the current product and are the correct reference. Spec attribute coverage is thinner than the other three SKUs; do not expect a dimensions shot to be buildable."
+  },
+
+  "approved_source_strings": {
+    "_note": "Verbatim from the creative brief BRIEF sheet row 6 (Text Overlay/Claims columns) and the Asset Tracker row 10 marketplace copy, which is live published copy. NOTE: the brief's 'FINAL APPROVED Attributes, Claims, Inclusions' column (S) is EMPTY for this SKU and for all 20 sibling SKUs in the same file - the approved language for this product lives in the Text Overlay/Claims columns themselves, which is why they are treated as the authority here.",
+    "shot_overlay_claims": {
+      "size_and_yield": "3.25L bottles / 2 bottles per carton / Yields 28 ready-to-use gallons per bottle",
+      "key_features": "Heavy-duty alkaline cleaner and degreaser removes tough greases, oils and other stubborn spills / Concentrated formula lowers end-use cost / Low foaming prevents recovery tank clogging",
+      "surfaces": "Concrete floors / Shower rooms / Walls / Equipment and machinery",
+      "dispenser": "Use with the Coastwide Professional ExpressMix wall-mount dispenser / *Sold separately"
+    },
+    "marketplace_bullets": [
+      "Industrial-strength cleaner/degreaser",
+      "Remove dirt, soils, inks, markers, pencil marks, black marks, graffiti, kitchen grease, motor oils, road film and vegetable oils, leaving the surface clean and void of discoloration",
+      "For use in Coastwide Professional ExpressMix dispensing system",
+      "Dilutes at 4 oz. per gallon. One 3.25 L bottle yields up to 28 ready to use gallons",
+      "3.25L container; 2 per pack",
+      "Un-scented green liquid",
+      "Contains no ammonia, harsh acids or phosphates",
+      "Certifications and standards: EPA, NSF, and Green Seal certified"
+    ],
+    "headliner": "Remove tough messes with this Coastwide Professional Power Clean ExpressMix Heavy-Duty Cleaner and Degreaser.",
+    "specs": {
+      "pack_qty": 2,
+      "capacity_oz": 110,
+      "scent": "Unscented",
+      "disinfectant": "No",
+      "concentrated_or_rtu": "Concentrated",
+      "dilution_control_system": "ExpressMix",
+      "dilution_ratio": "1:33",
+      "area_of_use": "Floors, walls and other hard surfaces"
+    }
+  },
+
+  "shots": [
+    {
+      "shot_id": "SKU_0",
+      "enabled": true,
+      "brief_shot_name": "SKU_0 - Hero image (ExpressMix alt)",
+      "purpose": "Marketplace main image. Two bottles on pure white, no text.",
+      "stack_template": "main_image.product_without_package",
+      "type": "hero_passthrough",
+      "text_provenance": "NONE - no text on this shot",
+      "overlay_text": null,
+      "scene_prompt": null,
+      "render_targets": ["RT_MAIN_WHITE"],
+      "acceptance_reference": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_0.png"
+    },
+    {
+      "shot_id": "SKU_1",
+      "enabled": true,
+      "brief_shot_name": "SKU_1 - Callout for size and yield",
+      "purpose": "Size and yield. Product with a yield headline above and two number callouts below.",
+      "stack_template": "education.specifications",
+      "type": "photo_overlay",
+      "text_provenance": "APPROVED",
+      "overlay_text": {
+        "headline": "Yields 28 ready-to-use",
+        "headline_line_2": "gallons per bottle",
+        "callouts": [
+          { "value": "3.25L",     "label": "Bottles" },
+          { "value": "2 Bottles", "label": "per Carton" }
+        ],
+        "source_string": "3.25L bottles / 2 bottles per carton / Yields 28 ready-to-use gallons per bottle",
+        "source_cell": "BRIEF!AN6"
+      },
+      "layout_direction": "White background. Orange #FF8200 Bold headline on the first line, Charcoal #414140 Regular continuation on the second, centered at the top. Two bottles centered in the middle band. Two number callouts side by side at the bottom: value in Orange Bold large, label in Charcoal Regular beneath.",
+      "scene_prompt": {
+        "template": "A clean product photograph on a pure white seamless background showing two identical green plastic concentrate bottles with black product labels, standing upright side by side and slightly overlapping, centered in the frame and occupying roughly the middle half of its height. The bottles must match the reference image exactly in color, label design, shape and proportion. Even, soft, shadowless studio lighting. No text added, no props, no hands, no background elements. IMPORTANT: leave the top quarter and the bottom quarter of the frame as clean, completely empty pure white space - these bands are reserved for text that will be added afterwards, so no part of the product or its shadow may enter them.",
+        "reserved_zone": "top_quarter_and_bottom_quarter",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_1.png"
+    },
+    {
+      "shot_id": "SKU_2",
+      "enabled": true,
+      "brief_shot_name": "SKU_2 - Work-life: warehouse / loading dock degreasing",
+      "purpose": "Work-style lifestyle. Product in use on a warehouse floor — replaces the benefits graphic card.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: prefer in-use photos over text/icon benefit cards.",
+      "replaced_from": {
+        "was": "graphic_only benefits card",
+        "reason": "User requested more work-life images and less text-based description"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_5 (janitorial supply room) or SKU_8 (kitchen). This is a warehouse loading dock: concrete floor, roll-up door light, worker spraying/wiping with concentrate context.",
+      "scene_prompt": {
+        "template": "A photorealistic warehouse loading-dock interior: a facilities worker in a gray polo, dark trousers and blue nitrile gloves, kneeling slightly while scrubbing a stubborn grease stain on a polished gray concrete floor with a cloth, a yellow mop bucket nearby. Soft daylight from a partially open roll-up door in the background. The cleaning bottle matching this product's color and proportions sits on the floor beside the bucket (label text not readable). Warm neutral industrial color grading. No readable text, no brand logos other than the product itself, no competitor branding, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "fidelity_gate": { "check_product_identity": true },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_3",
+      "enabled": true,
+      "brief_shot_name": "SKU_3 - Work-life: commercial restroom / shower room",
+      "purpose": "Work-style lifestyle. Product in use in a tiled shower/restroom — replaces the surfaces swatch graphic.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: surface swatch cards under-perform; prefer in-use lifestyle that implies hard-surface use.",
+      "replaced_from": {
+        "was": "graphic_only_with_generated_tiles surface swatches",
+        "reason": "User requested more work-life images instead of text/swatch cards"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_2 (warehouse), SKU_5 (supply room), SKU_7 (cafeteria), or SKU_8 (kitchen). This is a commercial shower room: gray tile, grab rail, soft wet reflections.",
+      "scene_prompt": {
+        "template": "A photorealistic commercial shower-room interior: a facilities worker in a light gray polo, dark trousers and blue nitrile gloves, wiping gray tiled wall and floor surfaces with a cloth after applying cleaner from a spray bottle matching this product. Stainless grab rail softly visible, wet tile reflections, even neutral lighting. Clean documentary style. No readable text, no brand logos other than the product bottle, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_4",
+      "enabled": true,
+      "brief_shot_name": "SKU_4 - Work-life: workshop equipment cleaning",
+      "purpose": "Work-style lifestyle. Degreaser in use on industrial equipment — replaces the instructions graphic card.",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: skip text instruction panels; show the product being used instead.",
+      "replaced_from": {
+        "was": "graphic_only two-step instructions card",
+        "reason": "User prefers work-life imagery over text-based description cards"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "anti_repetition_note": "Must NOT look like SKU_2 (warehouse floor), SKU_3 (shower), SKU_5 (dispenser room), or SKU_8 (kitchen). This is a workshop: gray machinery, metal surfaces, task lighting.",
+      "scene_prompt": {
+        "template": "A photorealistic industrial workshop scene: a facilities worker in a dark apron and blue nitrile gloves, wiping grease from a gray drill-press base and metal stand with a cloth, spray bottle matching this product held in the other hand. Warm overhead task lighting, realistic workshop background softly out of focus. No readable text, no brand logos other than the product bottle, no people other than the worker.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_5",
+      "enabled": true,
+      "brief_shot_name": "SKU_5 - ExpressMix dispenser callout",
+      "purpose": "Cross-sell / system context. A worker using the ExpressMix wall-mount dispenser, with a headline in the reserved upper-left area.",
+      "stack_template": "cross_sell.bundle_accessories",
+      "type": "photo_overlay",
+      "is_primary_demo_shot": true,
+      "demo_note": "The only photo_overlay lifestyle shot in this SKU. It is what makes this SKU demoable at all - the other five enabled shots are flat graphics.",
+      "overlay_text": {
+        "headline": "Easy to dilute and dispense",
+        "body": "Works with ExpressMix wall-mount dispenser for easily diluting and dispensing",
+        "source_string": "Use with the Coastwide Professional ExpressMix wall-mount dispenser / *Sold separately",
+        "source_cell": "BRIEF!AV6",
+        "DECIDED_2026-09-15": "Option A confirmed by Pratyoosh. Render ONLY the brief's approved string: headline 'Use with the Coastwide Professional ExpressMix wall-mount dispenser', with '*Sold separately' as a small footnote. The 'Easy to dilute and dispense' wording from Staples' published art is NOT used.",
+        "resolved_headline": "Use with the Coastwide Professional ExpressMix wall-mount dispenser",
+        "resolved_footnote": "*Sold separately"
+      },
+      "text_provenance": "APPROVED",
+      "layout_direction": "Headline block in the reserved clean upper-left area, left-aligned. Headline Orange #FF8200 Bold; footnote Charcoal #414140 Regular, small. Must not cross the worker or the dispenser unit.",
+      "scene_prompt": {
+        "template": "A photorealistic commercial facility scene: a male facilities worker in a gray polo shirt, dark trousers and blue nitrile gloves, seen from behind and slightly to the side, operating a black wall-mounted chemical dilution dispenser unit mounted at chest height on a muted blue-gray wall. A yellow commercial mop bucket with a wringer sits on the floor below, with a hose running from the dispenser down into it. The scene is lit with soft even indoor light. Realistic janitorial-supply-room setting, warm neutral color grading. No readable text anywhere, no visible brand logos, no competitor branding, no signage. IMPORTANT: leave the entire upper-left third of the frame as clean, uncluttered, evenly-lit plain wall with no objects, no fixtures, no strong texture and no busy detail - this area is reserved for a text headline that will be added afterwards.",
+        "reserved_zone": "upper_left_third",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image", "additional_product_references.dispenser_lifestyle"]
+      },
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_4-1.png",
+      "note": "The concentrate bottle itself is not visible in the reference image for this shot - it lives inside the dispenser. The hero is passed as an input image for color and identity context only. The Gemini fidelity gate for this shot must therefore check the SCENE, not product likeness. See the per-shot gate override in 01_BUILD_INSTRUCTIONS Stage 5."
+    },
+    {
+      "shot_id": "SKU_6",
+      "enabled": false,
+      "disabled_reason": "REGULATORY_ASSET - cannot be generated",
+      "brief_shot_name": "SKU_6 - Back label (flat lay)",
+      "purpose": "Flat reproduction of the regulatory back label so buyers can read ingredients, warnings and directions.",
+      "stack_template": "education.packaging",
+      "type": "asset_passthrough",
+      "text_provenance": "NONE - the supplied label artwork is placed as-is; no text is authored",
+      "overlay_text": null,
+      "blocker": "This image IS the regulatory label. It cannot be generated, redrawn, re-typeset or approximated - doing so would be modifying a chemical product label, which the Coastwide style guide explicitly prohibits without brand and compliance approval. The only lawful way to produce it is to place the supplied label artwork ('630800-67CWPR-L11966_CW020EM03-B_PowerClnrDgrsr_Bottle Label.ai/.pdf') onto a white canvas at the correct scale.",
+      "source_cell": "BRIEF!AX6",
+      "how_to_unblock": "Implement as a straight asset passthrough: rasterize the supplied label PDF at 300dpi, place centered on a white RT_SECONDARY_SQUARE canvas, no text added. This is a legitimate shot to enable - it is disabled here only because it needs no AI at all and is therefore a poor use of demo time. Enable it if a complete 8-shot stack matters more than demo narrative.",
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": "Staples Assets/Coastwide Power Cleaner/PDP Imagery/Bynder default-24321408_6.png"
+    },
+    {
+      "shot_id": "SKU_7",
+      "enabled": true,
+      "brief_shot_name": "SKU_7 - Work-life: cafeteria / food-service floor",
+      "purpose": "Work-style lifestyle. Product context in a food-service setting — replaces the satisfaction-guarantee trust graphic (no shield icon / placeholder copy).",
+      "stack_template": "lifestyle_context.use_cases",
+      "type": "photo_only",
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: drop trust-guarantee icon card entirely. Prefer product-in-use lifestyle over placeholder guarantee copy.",
+      "replaced_from": {
+        "was": "graphic_only satisfaction guarantee / trust panel",
+        "reason": "User explicitly does not want the trust guarantee icon; prefer work-life imagery"
+      },
+      "overlay_text": null,
+      "layout_direction": null,
+      "source_cell": "BRIEF!AZ6",
+      "anti_repetition_note": "Must NOT look like SKU_2 (warehouse), SKU_3 (restroom), SKU_4 (workshop), SKU_5 (janitorial closet), or SKU_8 (kitchen counter). This is a cafeteria dining floor: light vinyl tile, tables softly out of focus, worker mopping mid-aisle.",
+      "scene_prompt": {
+        "template": "A photorealistic commercial cafeteria dining area: a facilities worker in a gray polo shirt, dark trousers and blue nitrile gloves, seen in full figure mopping light vinyl tile flooring with a mop between rows of empty dining tables that are softly out of focus. Soft overhead fluorescent lighting, clean bright walls, no readable menus or signage. Warm neutral color grading. A yellow commercial mop bucket sits nearby on the floor. No visible brand logos, no competitor branding, no people other than the worker, no product bottles with readable labels in frame.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "fidelity_gate": { "check_product_identity": false },
+      "fidelity_gate_note": "Concentrate bottle may not be visible as a hero object — this is a work-context shot. Check setting and brand safety.",
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    },
+    {
+      "shot_id": "SKU_8",
+      "enabled": true,
+      "added_by": "InfoVision - NOT in the client brief",
+      "authorized_by": "Pratyoosh Patel, 15 Sep 2026 - 'add any other visual shot... focus on the lifestyle images / work style images'",
+      "brief_shot_name": "n/a - originated as an additional work-style shot",
+      "purpose": "Work-style / in-use lifestyle. Degreaser use on heavy soiling in a commercial kitchen — no text overlay.",
+      "stack_template": "lifestyle_context.in_use_focal_point",
+      "type": "photo_only",
+      "is_primary_demo_shot": true,
+      "text_provenance": "NONE - no text on this shot",
+      "type_rationale": "Demo preference 2026-09-16: lifestyle frames without text overlays, matching ExpressMop work-life style.",
+      "replaced_from": {
+        "was": "photo_overlay with Industrial-strength headline",
+        "reason": "Prefer clean in-use photo without text description"
+      },
+      "overlay_text": null,
+      "replaces": "The 'Certifications' graphic-only shot from config v1.0, which has been dropped.",
+      "anti_repetition_note": "This must NOT look like SKU_5. SKU_5 is a janitorial supply area: wall dispenser, mop bucket, worker seen from behind, muted blue-gray wall, tight framing. SKU_8 is a commercial kitchen: stainless steel, warm task lighting, worker seen from the side at a distance, wider framing.",
+      "layout_direction": null,
+      "scene_prompt": {
+        "template": "A photorealistic commercial kitchen scene: a facilities worker in a dark apron and blue nitrile gloves, seen from the side at a slight distance, scrubbing a large stainless steel prep counter with a cloth, with a stainless steel extraction hood and shelving behind. Warm overhead task lighting, clean realistic back-of-house environment, slight steam haze in the background. Warm neutral color grading. No readable text anywhere, no visible brand logos, no competitor branding, no signage, no product bottles in frame.",
+        "reserved_zone": "none",
+        "aspect_ratio": "1:1",
+        "input_images": ["hero_image"]
+      },
+      "fidelity_gate": { "check_product_identity": false },
+      "fidelity_gate_note": "No product bottle in frame - this is a work-context shot. Check setting and brand safety only.",
+      "render_targets": ["RT_SECONDARY_SQUARE"],
+      "acceptance_reference": null
+    }
+  ],
+
+  "shot_count": { "enabled": 8, "disabled": 1, "total_if_all_enabled": 9, "meets_6_to_8_rule": true, "note": "8 enabled - at the top of the range. Only SKU_6 (back label) stays disabled, because it is a pure asset passthrough that exercises no AI." },
+
+  "pipeline_mix": {
+    "hero_passthrough": 1,
+    "graphic_only": 0,
+    "graphic_only_with_generated_tiles": 0,
+    "photo_overlay": 2,
+    "photo_only": 5,
+    "note": "v1.2 demo mix: hero + two photo_overlay education shots + five photo_only work-life scenes. No trust-guarantee graphic, no benefits/surfaces/instructions text cards."
+  }
+}

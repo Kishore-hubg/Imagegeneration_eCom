@@ -1,0 +1,260 @@
+{
+  "ruleset_id": "coastwide",
+  "version": "1.0",
+  "brand_family": ["Coastwide Professional"],
+  "source_document": "Coastwide Digital Content Style Guide 8.17.26.pdf",
+  "source_pages_distilled": "1-41 (full document)",
+  "distilled_on": "2026-09-14",
+
+  "palette": {
+    "orange":    { "hex": "#FF8200", "rgb": [255, 130, 0], "pms": "151 C", "cmyk": [0, 49, 100, 0], "role": "primary brand color; headline color; container color" },
+    "charcoal":  { "hex": "#414140", "rgb": [65, 65, 64],  "cmyk": [0, 0, 2, 75], "role": "primary text color; container color" },
+    "white":     { "hex": "#FFFFFF", "rgb": [255, 255, 255], "cmyk": [0, 0, 0, 0], "role": "default background for image stacks; text/icon color on orange or charcoal containers" },
+    "black":     { "hex": "#000000", "rgb": [0, 0, 0], "cmyk": [0, 0, 0, 100], "role": "black" }
+  },
+
+  "infographic_palette": {
+    "orange_tint":       { "hex": "#FFA140" },
+    "orange_pale":       { "hex": "#FFE6CC" },
+    "gray_light":        { "hex": "#EEEEEE" },
+    "gray_light_darker": { "hex": "#D9D9D9" }
+  },
+
+  "color_rules": {
+    "default_stack_background": "#FFFFFF",
+    "on_orange_container": "Icons and text must be WHITE.",
+    "on_orange_background": "Icons and text must be WHITE.",
+    "on_charcoal_background_or_container": "Icons and text must be WHITE.",
+    "prohibited": [
+      "Do NOT use gradients anywhere.",
+      "Do NOT change the opacity of Brand Orange (or any brand color).",
+      "Do NOT place black text or icons on an orange background.",
+      "Do NOT place orange text on a plain white background where legibility suffers - never compromise legibility.",
+      "Do NOT place white text or icons on a black background."
+    ],
+    "observed_production_practice": "In the four finished Coastwide reference images in this folder, headlines are set in Orange #FF8200 on white and supporting body copy is set in Charcoal/near-black. This is consistent with the guide and is the pattern to follow."
+  },
+
+  "typography": {
+    "primary_typeface": "Axiforma",
+    "web_fallback_stack": "'Axiforma', 'Poppins', Inter, 'Helvetica Neue', Arial, sans-serif",
+    "font_file_status": "NOT PROVIDED in the shared folder. See 06_DECISIONS_LOG.md - licensed font files must be supplied by Staples or a metrically-close substitute approved.",
+    "capitalization_rule": "Sentence case only. Capitalize the first letter of the sentence or phrase, plus proper nouns (e.g. Coastwide). All other words lowercase. NEVER Title Case. NEVER ALL CAPS.",
+    "capitalization_conflict_note": "Some approved brief strings for these SKUs arrive in ALL CAPS (e.g. 'BUDGET-FRIENDLY'). The finished production art renders them in sentence case ('Budget-Friendly'). Case-normalize approved claim text to sentence case; this is a presentation change, not a wording change, and is permitted. Never change the words themselves.",
+    "hierarchy": {
+      "headline":      { "weight": "Bold" },
+      "sub_headline":  { "weight": "Regular" },
+      "body_title":    { "weight": "Bold" },
+      "body_sub_text": { "weight": "Regular" },
+      "body_text":     { "weight": "Regular" }
+    },
+    "reference_canvas_px": 1500,
+    "headline_size_by_word_count": [
+      { "words": 10, "size_px": 95,  "line_height_px": 115 },
+      { "words": 8,  "size_px": 105, "line_height_px": 121 },
+      { "words": 6,  "size_px": 115, "line_height_px": 118 },
+      { "words": 4,  "size_px": 128, "line_height_px": 130 },
+      { "words": 2,  "size_px": 130, "line_height_px": 95 },
+      { "words": 1,  "size_px": 130, "line_height_px": 95 }
+    ],
+    "size_limits_px": {
+      "min_any_text": 45,
+      "max_standard": 130,
+      "super_size": 180,
+      "super_size_rule": "180px is reserved for impact-first headlines where a single benefit owns the entire canvas. Limited to 1-2 words. Never exceed 180px. Any headline needing more words must be restructured to fit within the standard range."
+    },
+    "scaling_note": "All sizes above are for a 1500x1500 canvas. On any other canvas, multiply by (canvas_width / 1500). The min 45px and max 130px/180px limits scale with it. NOTE: the finished reference images in this folder are 1000x1000, i.e. a 0.667 scale factor.",
+    "mobile_rule": "Always prioritize mobile readability when selecting text sizes."
+  },
+
+  "brand_elements": {
+    "brand_icon": "Chevron icon and mirrored chevron icon.",
+    "containers": [
+      "Rounded rectangle for icon + text callouts",
+      "Rounded rectangle for text-only callouts",
+      "Custom callouts for fewer texts + icon"
+    ],
+    "corner_radius_rule": "Every corner radius must align with the sample arc derived from the corner of the brand icon. The arc does not change when scaled, so it is the visual reference at any size.",
+    "asset_status": "Vector chevron icon and pattern files are NOT PROVIDED in the shared folder. See 06_DECISIONS_LOG.md."
+  },
+
+  "iconography": {
+    "library": "Streamline 3.0, Regular set (via Figma Streamline plugin)",
+    "style": "Outline icons with rounded corners",
+    "stroke_weight_px": 1.5,
+    "containers_allowed": ["orange container with white icon", "icon only", "orange box with white icon", "custom box with orange icon"],
+    "prohibited": [
+      "Do not use any other icon or illustration library.",
+      "Do not use an orange circle with a white icon.",
+      "Do not use an orange outline with an orange icon.",
+      "Do not nest a shape inside a shape (box inside box)."
+    ],
+    "fallback": "If a needed icon does not exist in Streamline 3.0, use an icon visually similar to the style above.",
+    "asset_status": "Streamline icon files are NOT PROVIDED. For the POC, draw equivalent outline icons directly as inline SVG paths at 1.5px stroke, rounded caps and joins."
+  },
+
+  "infographic_templates": [
+    "Level / category / intensity scale",
+    "Product specification table (size / ply / count)",
+    "Price + feature comparison (best value callout)",
+    "Phases / incremental data (percentage steps)",
+    "Numbered phase list (1, 2, 3)",
+    "Spec comparison vs others (slider scale)",
+    "Comparative checkmark chart vs others",
+    "Comparative checkmark chart vs self",
+    "Size comparison chart (capacity / bag size / dimensions)",
+    "Sub-detail cluster (3 benefit tiles with icon + title + body)"
+  ],
+
+  "callout_placement_rules": {
+    "regular_feature_callouts": "Small pill/box callouts used for standard feature labels.",
+    "above_or_below_product": "Horizontal callout rows sit above or below the product image.",
+    "beside_product": "Vertical callout stacks sit beside the product image.",
+    "alone_on_canvas": "Full-width callouts used alone on the canvas.",
+    "zoom_ins": "Circular zoom-in crops used to show a specific detail.",
+    "numbers_callout": "Use the product-count / pack-size number callout independently at the bottom-right or bottom-left corner of the canvas.",
+    "color_callout_sizing": "Use the WIDER callout when the canvas has a thinner/taller product image, or when paired with longer feature copy. Use the SMALLER callout when the product image takes up more space and the feature copy is short."
+  },
+
+  "hard_rules": [
+    {
+      "id": "PRODUCT_ACCURACY",
+      "rule": "Products in every stack image must be consistent with the real product in color, detail and angle. A good reference of the product is required before generating any subsequent angle.",
+      "enforced_by": "Gemini fidelity gate (photo shots) + human review"
+    },
+    {
+      "id": "NO_OVERLAY_ON_PRODUCT",
+      "rule": "The product must always be in front. Never place text, icons, boxes or any other element over the product.",
+      "enforced_by": "Reserved-zone scene prompt + Claude overlay placement + overlay-bounds lint"
+    },
+    {
+      "id": "PRODUCT_BRANDED",
+      "rule": "Products should always be branded where possible. For consumable or unbranded items this does not apply to every image in the stack, as long as branding is sufficiently established in the main image and other images.",
+      "enforced_by": "Hero image is the source of truth; never regenerate the product itself"
+    },
+    {
+      "id": "SECONDARY_PRODUCTS_COASTWIDE",
+      "rule": "Surrounding and secondary products in a lifestyle frame should be Coastwide products. No competitor logo may appear.",
+      "enforced_by": "Scene prompt negative instruction + Gemini fidelity gate"
+    },
+    {
+      "id": "LIFESTYLE_COLOR_TEMPERATURE",
+      "rule": "Where possible choose warmer colors for environment elements. Walls: white or light gray. Tables and shelves: light woods.",
+      "enforced_by": "Scene prompt"
+    },
+    {
+      "id": "CHEMICAL_LABEL_LOCK",
+      "rule": "Packaging stickers must NOT be applied to, or used to modify, cleaning solution, disinfectant or chemical product labels without explicit approval from the brand and compliance team. Regulatory labelling requirements apply.",
+      "severity": "BLOCKING",
+      "applies_to_skus": ["24321408", "24639471"],
+      "enforced_by": "No sticker shots are configured. Chemical SKU shots draw text on the canvas only, never on or over the bottle/cartridge label."
+    },
+    {
+      "id": "APPROVED_CLAIMS_ONLY",
+      "rule": "For regulated chemical SKUs, every word of visible text must originate from an approved source string in the SKU config. No new safety, performance, efficacy or certification claim may be authored, inferred, rephrased into a stronger form, or added.",
+      "severity": "BLOCKING",
+      "applies_to_skus": ["24321408", "24639471"],
+      "enforced_by": "claim_lint (see 01_BUILD_INSTRUCTIONS Stage 7)"
+    },
+    {
+      "id": "NO_STALE_CONTENT",
+      "rule": "Unless approved otherwise, do not include content that goes stale: review counts, star ratings, other metrics, or links.",
+      "enforced_by": "Shot config text is fixed and approved; no dynamic copy"
+    }
+  ],
+
+  "lifestyle_imagery_rules": {
+    "wall_colors": ["white", "light gray"],
+    "surface_materials": ["light wood tables", "light wood shelves"],
+    "environment_temperature": "warm",
+    "modes": {
+      "environment_and_room_scene": "Show the product living in a space that matches where it actually gets used.",
+      "human_context_and_scale": "Place a person in the frame to communicate size and real-world relevance.",
+      "in_use_focal": "Show the product at the moment it delivers its value.",
+      "the_active_moment": "Freeze the single moment that makes the product's value undeniable.",
+      "before_and_after": "Use when the product changes a customer's experience."
+    },
+    "composition_devices": ["orange box container cutout", "overlapping images"],
+    "typical_settings_for_this_brand": [
+      "commercial facility corridor or lobby",
+      "restroom / shower room",
+      "warehouse or back-of-house",
+      "cafeteria or breakroom",
+      "janitorial closet / supply area"
+    ]
+  },
+
+  "packaging_sticker_rules": {
+    "when_appropriate": "Only where clear retail packaging is NOT present.",
+    "preferred_approach": "Where a sticker can be applied directly to the product, that is preferred (flat-faced products, boxed components, bagged items). Where the product form makes this impractical (cylindrical or irregular shapes), attach the sticker to a plain carton box and place the product around it.",
+    "packaging_modification": "If retail or case/carton packaging exists but key information is too small to read on mobile in a main image, the packaging may be modified to improve readability, maintaining the fidelity of the existing design and layout.",
+    "chemical_prohibition": "Packaging stickers must NOT be applied to or used to modify cleaning solution, disinfectant or chemical product labels without explicit brand and compliance approval. Regulatory labelling requirements apply.",
+    "scale": "Starting point: approximately 20% of the product's visible surface area. May be adjusted for readability but must not obscure important product features or branding.",
+    "placement_default": "Bottom-left.",
+    "placement_alternate": "Centered vertically and horizontally, for tall narrow products.",
+    "poc_status": "NOT IMPLEMENTED in the POC. Both Coastwide SKUs in scope are chemical products and are therefore excluded by the chemical prohibition above."
+  },
+
+  "stack_templates": {
+    "main_image": {
+      "product_without_package": { "media": ["Product"], "when": "Generally the default option." },
+      "product_with_package":    { "media": ["Product"], "when": "Use when the product alone does not effectively convey key details and packaging text strengthens consumer selection. Examples: tissue ply count, trash bag gauge or capacity." },
+      "just_packaging":          { "media": ["Product"], "when": "Use when showing packaging AND product is redundant and would push both to be smaller and less effective." },
+      "360":                     { "media": ["Product"], "when": "Use when various angles are necessary to convey critical information. Discretionary based on availability of a 360 image, marketplace option, competitive landscape." }
+    },
+    "lifestyle_context": {
+      "natural_setting_focal": { "media": ["Lifestyle"], "when": "Best practice when the consumer already understands the product's scale. E.g. a paper towel dispenser mounted in a restroom highlights the unit without raising size questions." },
+      "natural_setting_scene": { "media": ["Lifestyle"], "when": "Best practice when understanding scale is helpful. E.g. a floor-standing waste receptacle or mop bucket where the buyer needs to gauge fit within a facility space. Discretion on including a person for scale." },
+      "in_use_focal_point":    { "media": ["Product", "Lifestyle", "Infographics"], "when": "Best practice to include - lets the consumer see the product in use. Discretion on natural setting vs in use vs both, and on showing multiple settings." },
+      "use_cases":             { "media": ["Lifestyle", "Infographics"], "when": "Use to show the different settings where the product can be used - commercial, home, school." },
+      "before_after":          { "media": ["Lifestyle"], "when": "Use when the product changes a customer's experience - e.g. a multi-surface cleaner takes a restroom from soiled to sanitized." }
+    },
+    "education": {
+      "features_benefits":        { "media": ["Product", "Lifestyle", "Infographics"], "when": "Generally good to include, to convey the key value proposition of the product." },
+      "specifications":           { "media": ["Product", "Lifestyle", "Infographics"], "when": "Use when there are key details to convey such as quantity, weight." },
+      "detail_zoom_in":           { "media": ["Infographics"], "when": "Use when further understanding of a specific detail helps - material (texture/color/finish), function (mechanism/buttons)." },
+      "dimensions":               { "media": ["Product", "Lifestyle"], "when": "Use when product size informs a customer decision - e.g. a waste receptacle where capacity and footprint determine fit. NOT for small consumables like gloves or sponges." },
+      "product_parts":            { "media": ["Product", "Lifestyle"], "when": "Use when there are different parts to highlight - buttons, functional components." },
+      "contents_whats_in_the_box":{ "media": ["Product", "Infographics"], "when": "Use when the product consists of multiple items - e.g. a dispenser starter kit with mounting hardware, a janitorial cleaning kit with mop head, handle and bucket." },
+      "packaging":                { "media": ["Product"], "when": "Use when packaging is functionally useful as part of the product, or is a concise way to convey key decision details. Assess whether competitors include a packaging shot." },
+      "instructions_assembly":    { "media": ["Infographics"], "when": "Use when assembly is required and ease of assembly is part of the value proposition." },
+      "instructions_use":         { "media": ["Infographics"], "when": "Use when there is some complexity of use and ease of use is part of the value proposition." },
+      "instructions_cleaning":    { "media": ["Infographics"], "when": "Use when cleaning is a required aspect of use and ease of cleaning is part of the value proposition." },
+      "size_chart":               { "media": ["Infographics"], "when": "Use when there are different sizes and the size decision is nuanced." }
+    },
+    "comparison": {
+      "available_options": { "media": ["Infographics"], "when": "Use when there is a range of intuitive options to convey - pack size, color." },
+      "vs_self":           { "media": ["Infographics"], "when": "Use when the brand carries a range of options a consumer may be deciding between - e.g. different ply counts across the bath tissue line, or capacity tiers within a trash liner family." },
+      "vs_competitor":     { "media": ["Infographics"], "when": "Use when the product is differentiated versus competitors." },
+      "new_look":          { "media": ["Infographics"], "when": "Use when a product has undergone a packaging redesign." }
+    },
+    "trust_social_proof": {
+      "brand_story":    { "media": ["Infographics"], "when": "Generally good to use, to highlight the company or brand narrative. Coastwide Professional is positioned as 'A Staples professional brand'." },
+      "certifications": { "media": ["Lifestyle", "Infographics"], "when": "Use when there are applicable safety, compliance or sustainability certifications, claims or marks." },
+      "testimonial":    { "media": ["Infographics"], "when": "Use when customer or press content is available and adds credibility. Avoid content that goes stale." },
+      "ugc":            { "media": ["Infographics"], "when": "Use when available and there is discretionary value in making it real to a customer." }
+    },
+    "cross_sell": {
+      "bundle_accessories": { "media": ["Product"], "when": "Use when there are products that logically go with the item being purchased - e.g. a mop system with replacement mop heads and bucket accessories." },
+      "related_products":   { "media": ["Product"], "when": "Use when the product is part of a broader category the customer may be interested in." }
+    }
+  },
+
+  "brand_voice": {
+    "source_document": "Staples Assets/Staples & Coastwide Brand Voice.docx",
+    "applies_to": ["Coastwide Professional"],
+    "summary": "Direct, trustworthy and solution oriented. A committed personality that ensures customers receive reliable and efficient Jan San solutions. Communication is straightforward and assures the reader of dependable results, emphasizing time and cost savings for facility management.",
+    "values": ["Reliability", "Efficiency", "Clarity", "Commitment"],
+    "how_to_write": [
+      "Use straightforward language that emphasizes dependable results and practical benefits.",
+      "Speak directly to the reader, reassuring them of the commitment to quality and efficiency.",
+      "Combine concise statements with detailed explanations of how solutions save time and money.",
+      "Focus on real-world facility scenarios and the advantages of choosing Coastwide Professional.",
+      "Employ assertive language that instills confidence in the reliability of the products and services."
+    ],
+    "tone": "Committed",
+    "manner": "Purposeful",
+    "audience": "Facilities buyers and Jan San decision makers",
+    "poc_constraint": "Voice guidance is for SELECTING and SHORTENING approved claim text only. Never author a new product claim. For these two chemical SKUs this is a BLOCKING rule - see hard_rules.APPROVED_CLAIMS_ONLY."
+  }
+}

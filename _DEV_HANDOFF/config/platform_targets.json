@@ -1,0 +1,171 @@
+{
+  "version": "1.0",
+  "researched_on": "2026-09-14",
+
+  "_README": "Five sales channels were researched and deduplicated by ACTUAL REQUIREMENT (aspect ratio, background rule, text-allowed flag), not treated as five independent outputs. Finding: all five channels use a 1:1 square main image with a pure-white background and no text, and all five accept a 1:1 secondary/gallery image with text allowed. They therefore collapse into TWO render targets. Rendering at the conservative superset of every channel's requirement means one file satisfies all five for each slot.",
+
+  "render_targets": [
+    {
+      "id": "RT_MAIN_WHITE",
+      "label": "Main / hero image",
+      "canvas_px": [2400, 2400],
+      "aspect_ratio": "1:1",
+      "background_rule": "pure_white",
+      "background_rgb": [255, 255, 255],
+      "text_allowed": false,
+      "graphics_allowed": false,
+      "watermark_allowed": false,
+      "inset_images_allowed": false,
+      "product_frame_fill_min_pct": 85,
+      "output_format": "png",
+      "color_space": "sRGB",
+      "max_file_size_mb": 5,
+      "satisfies_channels": ["amazon", "walmart", "target", "best_buy", "staples_com"],
+      "sizing_rationale": "2400px is the largest 'longest side' minimum found across the five channels (Target). It clears Amazon's 1600px zoom recommendation and every stated Walmart minimum. Square satisfies Walmart's and Target's 1:1 requirement and is acceptable to Amazon, which states no aspect ratio requirement.",
+      "machine_checks": [
+        "every pixel outside the product silhouette is exactly RGB(255,255,255)",
+        "no text glyphs detected anywhere in frame",
+        "product bounding box covers >= 85% of the shorter frame dimension",
+        "image is exactly 2400x2400",
+        "file size <= 5 MB"
+      ]
+    },
+    {
+      "id": "RT_SECONDARY_SQUARE",
+      "label": "Secondary / gallery image",
+      "canvas_px": [2000, 2000],
+      "design_canvas_px": [1500, 1500],
+      "design_to_output_scale": 1.3333,
+      "aspect_ratio": "1:1",
+      "background_rule": "any",
+      "text_allowed": true,
+      "graphics_allowed": true,
+      "output_format": "png",
+      "color_space": "sRGB",
+      "max_file_size_mb": 5,
+      "satisfies_channels": ["amazon", "walmart", "target", "best_buy", "staples_com"],
+      "sizing_rationale": "Both style guides specify 1500x1500 as the design canvas and all type sizes are given for it. Design at 1500 in vector, then render the same vector at 2000x2000 for delivery - lossless, and it clears every channel's secondary-image recommendation with zoom headroom. NOTE: the finished production reference images in this folder are 1000x1000, i.e. Staples' own current output is smaller than this target.",
+      "machine_checks": [
+        "image is exactly 2000x2000",
+        "no overlay element intersects the product bounding box",
+        "every hex color present in the overlay layer exists in the brand ruleset palette",
+        "every visible text string matches an approved source string in the SKU config",
+        "smallest rendered text size >= 45px at the 1500 design canvas (i.e. >= 60px at 2000 output)",
+        "file size <= 5 MB"
+      ]
+    }
+  ],
+
+  "channels": [
+    {
+      "channel_id": "amazon",
+      "display_name": "Amazon",
+      "main_image_target": "RT_MAIN_WHITE",
+      "secondary_image_target": "RT_SECONDARY_SQUARE",
+      "requirements": {
+        "background": "Pure white, RGB(255,255,255). Machine-checked by Amazon on upload.",
+        "text_logo_watermark_on_main": "Not allowed.",
+        "product_frame_fill_min_pct": 85,
+        "min_longest_side_px": 1600,
+        "hard_min_longest_side_px": 1000,
+        "aspect_ratio": "No stated requirement.",
+        "max_file_size_mb": 10,
+        "formats": ["JPEG", "PNG", "TIFF", "GIF"],
+        "color_space": "sRGB recommended"
+      },
+      "show_in_ui": true,
+      "confidence": "CONFIRMED",
+      "confidence_note": "Carried forward as confirmed from the prior planning work on this project. Amazon's main-image rules are also the most widely and consistently documented of the five."
+    },
+    {
+      "channel_id": "walmart",
+      "display_name": "Walmart Marketplace",
+      "main_image_target": "RT_MAIN_WHITE",
+      "secondary_image_target": "RT_SECONDARY_SQUARE",
+      "requirements": {
+        "background": "Pure white, RGB(255,255,255), required on the primary image.",
+        "text_logo_watermark_on_main": "Not allowed.",
+        "aspect_ratio": "1:1 square.",
+        "recommended_px": "2200x2200 (one source) / 2000x2000 (another source)",
+        "min_px_for_zoom": 1500,
+        "auto_unpublish_threshold_px": "Primary images below 500x500 are automatically unpublished.",
+        "max_file_size_mb": 5,
+        "formats": ["JPEG", "PNG", "BMP"],
+        "image_count_guidance": "At least 4 images; 6 or more for the best content score."
+      },
+      "show_in_ui": true,
+      "confidence": "SECONDARY_SOURCES_ONLY",
+      "confidence_note": "CONFLICTING NUMBERS ACROSS SOURCES. Minimum size is variously reported as 500x500, 640x480, 1000x1000 and 2000x2000. The background rule, 1:1 ratio and no-text rule are consistent across all sources. RT_MAIN_WHITE at 2400x2400 clears every reported figure, so the conflict does not block the build - but the exact minimum should be confirmed against Walmart Seller Center before any production claim is made to the client."
+    },
+    {
+      "channel_id": "target",
+      "display_name": "Target Plus",
+      "main_image_target": "RT_MAIN_WHITE",
+      "secondary_image_target": "RT_SECONDARY_SQUARE",
+      "requirements": {
+        "background": "Pure white, RGB(255,255,255).",
+        "text_graphics_insets_on_main": "Not allowed - no additional text, graphics or inset images.",
+        "aspect_ratio": "Square; product fills the frame equally.",
+        "product_frame_fill_min_pct": 85,
+        "primary_min_longest_side_px": 2400,
+        "general_min_px": "1000x1000",
+        "general_max_px": "5000x5000",
+        "min_dpi": 300,
+        "formats": ["JPG", "PNG", "TIF", "PSD"],
+        "color_space": "RGB"
+      },
+      "show_in_ui": true,
+      "confidence": "SECONDARY_SOURCES_ONLY",
+      "confidence_note": "Drawn from partner-facing summaries and integration-platform help docs rather than Target's own partner portal, which is login-gated. The 2400px primary minimum is the binding constraint that sets RT_MAIN_WHITE's size. Confirm via Target Plus partner documentation."
+    },
+    {
+      "channel_id": "best_buy",
+      "display_name": "Best Buy Marketplace",
+      "main_image_target": "RT_MAIN_WHITE",
+      "secondary_image_target": "RT_SECONDARY_SQUARE",
+      "requirements": {
+        "inherits_from": "amazon",
+        "note": "Applies Amazon's requirements verbatim. See the amazon entry above for the actual figures."
+      },
+      "confidence": "INHERITED_BY_DECISION",
+      "DECIDED_2026-09-15": {
+        "decision": "Best Buy inherits Amazon's spec. Confirmed by Pratyoosh: 'use the same as Amazon's for this one without explicitly mentioning anywhere on the user interface.'",
+        "rationale": "Best Buy's own figures sit behind the login-gated partner portal and no authoritative public source was found. Amazon's spec is the strictest of the three that could be verified, so applying it is the conservative choice - anything that clears Amazon almost certainly clears Best Buy.",
+        "UI_CONSTRAINT": "Do NOT display Best Buy anywhere in the frontend - not on the landing page, not in the per-shot status rows, not in the results grid, not in the package README. The channel is served by the same two render targets as everything else, so no output changes; only the label is suppressed. This avoids putting an unverified compliance claim in front of the client.",
+        "implementation": "Add a `show_in_ui: false` flag on this channel and have the frontend filter channels on it. Do not solve this by deleting the channel - it should remain in the config so the coverage logic stays complete and so it can be switched on the moment the real spec arrives."
+      },
+      "show_in_ui": false,
+      "how_to_resolve_properly": "Ask Sandeep whether Staples has Best Buy marketplace image specs on file - as an existing Best Buy seller they almost certainly do. One answer turns this from inherited to verified."
+    },
+    {
+      "channel_id": "staples_com",
+      "display_name": "Staples.com",
+      "main_image_target": "RT_MAIN_WHITE",
+      "secondary_image_target": "RT_SECONDARY_SQUARE",
+      "requirements": {
+        "observed_production_output_px": "1000x1000",
+        "observed_note": "Every finished 'Bynder default-*' reference image in this folder is exactly 1000x1000. That is Staples' own current delivery size for PDP imagery, not necessarily a maximum. Our RT_SECONDARY_SQUARE at 2000x2000 is double it."
+      },
+      "confidence": "ACCEPTED_BY_DECISION",
+      "DECIDED_2026-09-15": "Pratyoosh confirmed: proceed on the observed 1000x1000 evidence, served by the same two render targets. No further research needed for the POC.",
+      "show_in_ui": true
+    }
+  ],
+
+  "open_items": [
+    "RESOLVED 2026-09-15 - Best Buy: inherits Amazon's spec, suppressed from the UI. See the channel entry.",
+    "RESOLVED 2026-09-15 - Staples.com: proceeding on observed 1000x1000 evidence.",
+    "Walmart: sources disagree on minimum pixel size (500x500 / 640x480 / 1000x1000 / 2000x2000). Does not block - RT_MAIN_WHITE at 2400px clears every reported figure. Confirm against Seller Center before any production claim.",
+    "Target: the 2400px primary minimum comes from a secondary source and is the single number driving RT_MAIN_WHITE's canvas size. Load-bearing, so worth confirming eventually.",
+    "No channel in scope requires a non-square aspect ratio. If a mobile-first 4:5 or a video thumbnail target is added later, it becomes RT_3 and the nano-banana aspect_ratio parameter changes with it - the architecture already supports this."
+  ],
+
+  "sources": [
+    { "url": "https://isopeel.com/guides/marketplace-image-requirements-comparison/", "used_for": "Amazon and Walmart cross-check", "type": "secondary" },
+    { "url": "https://pixelbatch.io/blog/walmart-image-requirements-guide", "used_for": "Walmart", "type": "secondary" },
+    { "url": "https://isopeel.com/guides/walmart-marketplace-image-requirements/", "used_for": "Walmart", "type": "secondary" },
+    { "url": "https://help.zentail.com/en/articles/8615160-requirements-for-selling-on-target", "used_for": "Target Plus", "type": "secondary" },
+    { "url": "https://feedonomics.com/blog/selling-on-target/", "used_for": "Target Plus", "type": "secondary" },
+    { "url": "https://partners.bestbuy.com/-/vendor-supplied-files-and-images", "used_for": "Best Buy - LOGIN GATED, not retrievable", "type": "primary_inaccessible" }
+  ]
+}

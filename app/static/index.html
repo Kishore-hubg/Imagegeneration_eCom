@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Staples marketplace image studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <span class="mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="#E42A11"/>
+            <path d="M8 14h12M14 8v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <p class="eyebrow">Staples · Coastwide Professional</p>
+          <h1>Marketplace image studio</h1>
+        </div>
+      </div>
+      <div class="topbar-meta">
+        <span id="mode-pill" class="pill mock">Mock mode</span>
+        <span id="channel-pills" class="channel-row"></span>
+      </div>
+    </header>
+
+    <main>
+      <section id="landing" class="panel landing">
+        <div class="section-head">
+          <h2>Select a product</h2>
+          <p>Heroes and production panels come from <strong>Staples Assets</strong>. Click a card to generate the stack, then compare against the finished reference art.</p>
+        </div>
+        <div id="sku-grid" class="sku-grid" aria-live="polite"></div>
+        <aside id="sku-brief" class="sku-brief hidden" aria-live="polite"></aside>
+      </section>
+
+      <section id="run" class="panel run hidden">
+        <div class="run-head">
+          <button type="button" id="back-btn" class="ghost-btn">← Products</button>
+          <div>
+            <p class="eyebrow" id="run-brand"></p>
+            <h2 id="run-title">Generating</h2>
+            <p class="sub" id="run-sub"></p>
+          </div>
+          <div class="run-actions">
+            <div class="progress-block">
+              <div class="progress-track"><div id="progress-bar" class="progress-fill"></div></div>
+              <p id="progress-label" class="progress-label">0 / 0</p>
+            </div>
+            <a id="download-btn" class="primary-btn disabled" href="#" aria-disabled="true">Download package</a>
+          </div>
+        </div>
+
+        <div class="run-layout">
+          <ol id="shot-list" class="shot-list"></ol>
+          <div class="results">
+            <div class="results-head">
+              <h3>Results</h3>
+              <label class="toggle">
+                <input type="checkbox" id="compare-toggle" checked />
+                <span>Side-by-side vs Staples Assets</span>
+              </label>
+            </div>
+            <div id="results-grid" class="results-grid"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Proof of concept · brand colors from Staples and Coastwide Digital Content Style Guides 8.17.26 · sentence case only · no gradients</p>
+    </footer>
+  </div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
